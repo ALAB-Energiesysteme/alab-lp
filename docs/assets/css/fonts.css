@@ -1,0 +1,17 @@
+/* Montserrat lokal – nur die Schnitte, die benötigt werden */
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/montserrat-v31-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/montserrat-v31-latin-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+/* Fallback-Stack */
+:root { --font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }

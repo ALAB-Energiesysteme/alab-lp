@@ -1,0 +1,55 @@
+:root{
+  --alab-gold-1:#E5C44D; /* oben */
+  --alab-gold-2:#F3D663; /* unten */
+  --alab-gold:#E6C23C;
+  --bg:#0b0b0b;
+  --fg:#ffffff;
+  --muted:#c9c9c9;
+  --radius:18px;
+  --shadow:0 8px 30px rgba(0,0,0,.15);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--fg);
+  background:#0b0b0b;
+  font-family:var(--font-sans);
+  line-height:1.5;
+}
+.container{max-width:1120px;margin-inline:auto;padding:clamp(16px,2vw,32px)}
+.header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--fg)}
+.logo img{width:40px;height:40px}
+.badge{font-size:12px;color:var(--muted)}
+.hero{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;
+  padding:32px; border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--alab-gold-1),var(--alab-gold-2));
+  color:#111;
+}
+@media (max-width:900px){ .hero{grid-template-columns:1fr;padding:24px} }
+.hero h1{margin:0 0 10px;font-weight:800;letter-spacing:.2px}
+.hero p{margin:0 0 16px;color:#222}
+.card{
+  background:#111; color:#fff; border-radius:var(--radius); box-shadow:var(--shadow);
+  padding:20px;
+}
+.usps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+@media (max-width:900px){ .usps{grid-template-columns:1fr} }
+.usp{background:#151515;border:1px solid #262626;border-radius:var(--radius);padding:16px}
+.usp strong{color:var(--alab-gold)}
+
+.form{display:grid;gap:12px}
+.form input, .form select{
+  width:100%;padding:12px 14px;border-radius:12px;border:1px solid #2a2a2a;background:#0f0f0f;color:#fff;
+}
+.form button{
+  padding:12px 16px;border:0;border-radius:12px;cursor:pointer;font-weight:700;
+  background:linear-gradient(180deg,var(--alab-gold-1),var(--alab-gold-2));
+}
+.form .hint{font-size:12px;color:#a8a8a8}
+.footer{opacity:.9;margin:48px 0 16px;font-size:14px}
+.footer a{color:#ddd;text-decoration:none}
+.picture{border-radius:var(--radius);overflow:hidden;min-height:260px;background:#0f0f0f}
+picture img{display:block;width:100%;height:auto}

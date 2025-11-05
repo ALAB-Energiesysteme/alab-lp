@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+  {% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
+
+  <!-- globale Assets -->
+  <link rel="preload" href="/assets/fonts/montserrat-v31-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+
+  <!-- seiten-spezifische CSS -->
+  {% for href in page.css_files %}<link rel="stylesheet" href="{{ href }}">{% endfor %}
+
+  <!-- Consent + GTM -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent','default',{
+      ad_user_data:'denied', ad_personalization:'denied',
+      ad_storage:'denied', analytics_storage:'denied'
+    });
+  </script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;j.defer=true;j.src='https://www.googletagmanager.com/gtm.js?id=GTM-NJZV7GTH'+dl;f.parentNode.insertBefore(j,f);})
+  (window,document,'script','dataLayer','GTM-NJZV7GTH');</script>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJZV7GTH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+</head>
+<body class="{{ bodyClass | default('') }}" data-location="{{ dataLocation | default('pv-zuhause') }}">
+  {% block content %}{% endblock %}
+
+  <!-- seiten-spezifische JS -->
+  {% for src in page.js_files %}<script src="{{ src }}" defer></script>{% endfor %}
+</body>
+</html>
