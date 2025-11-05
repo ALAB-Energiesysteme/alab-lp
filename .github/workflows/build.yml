@@ -1,0 +1,15 @@
+name: Build LP (11ty)
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm run build
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: 'docs --force'
+          message: 'build: 11ty output'
+          default_author: github_actions

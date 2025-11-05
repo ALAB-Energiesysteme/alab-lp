@@ -1,0 +1,8 @@
+{
+  "name": "alab-lp",
+  "private": true,
+  "scripts": {
+    "dev": "npx @11ty/eleventy --serve --input=src --output=docs",
+    "build": "npx @11ty/eleventy --input=src --output=docs"
+  }
+}
