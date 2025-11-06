@@ -929,3 +929,44 @@ html { scroll-behavior: smooth; }
   .alab-contact__image-section { order: 2; }
   .alab-contact__address-group.is-detached { order: 3; margin-top: 10px; }
 }
+/* ==== MOBILE ULTRA-COMPACT: Step 2 + Step 4 ==== */
+@media (max-width: 767px) {
+  /* --- Step 1: Adresse – Placeholder nicht unterm Icon --- */
+  #step1 .alab-contact__input--with-icon { padding-left: 56px; }  /* war 42px */
+  #step1 .alab-contact__input-icon { left: 14px; width: 18px; height: 18px; }
+
+  /* --- Step 2: Karte & Sidebar viel kompakter --- */
+  #step2 .alab-contact__map-content { gap: 14px; }
+  #step2 .alab-contact__map-large   { height: 280px; border-radius: 10px; }
+
+  #step2 .alab-contact__map-hints   { margin-top: 8px; }
+  #step2 .alab-contact__map-hints p { margin: 6px 0; font-size: 0.9rem; }
+
+  #step2 .alab-contact__map-sidebar { padding: 12px; border-width: 1px; }
+  #step2 .alab-contact__roof-info h3 { font-size: 1.0rem; margin: 0 0 8px; }
+  #step2 .alab-contact__instruction { padding: 8px 10px; margin-bottom: 10px; font-size: 0.85rem; }
+  #step2 .alab-contact__roof-label  { font-size: 0.82rem; margin-bottom: 4px; }
+  #step2 .alab-contact__roof-size   { font-size: 1.8rem; }
+  #step2 .alab-contact__divider     { margin: 12px 0; }
+  #step2 .alab-contact__manual-input{ padding: 10px 12px; margin-bottom: 12px; }
+  #step2 .alab-contact__submit      { padding: 12px 16px; font-size: 0.95rem; }
+
+  /* --- Step 4: Formular deutlich schlanker --- */
+  #step4 .alab-contact__form-section--full { max-width: 100%; }
+  #step4 .alab-contact__success-banner { padding: 16px; margin-bottom: 16px; border-radius: 10px; }
+  #step4 .alab-contact__success-banner h2 { font-size: 1.35rem; margin: 0 0 6px; }
+  #step4 .alab-contact__success-banner p  { font-size: 0.95rem; }
+
+  #step4 .alab-contact__label      { font-size: 0.8rem; margin-bottom: 6px; }
+  #step4 .alab-contact__input,
+  #step4 .alab-contact__textarea   { padding: 10px 12px; font-size: 0.98rem; }
+  #step4 .alab-contact__textarea   { min-height: 90px; }
+  #step4 .alab-contact__form-group { margin-bottom: 12px; }
+  #step4 .alab-contact__form-row   { gap: 12px; }
+  #step4 .alab-contact__submit     { padding: 12px 16px; font-size: 1rem; }
+}
+
+/* Auf mobilen Geräten ab ~380px nebeneinander: Vor-/Nachname & E-Mail/Telefon */
+@media (max-width: 767px) and (min-width: 380px) {
+  #step4 .alab-contact__form-row { grid-template-columns: 1fr 1fr; }
+}
