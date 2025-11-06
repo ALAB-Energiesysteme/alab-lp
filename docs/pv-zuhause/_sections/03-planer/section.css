@@ -806,6 +806,9 @@
     }
 }
 
+/* Autocomplete immer vorne */
+.pac-container { z-index: 10000; }
+
 
 html { scroll-behavior: smooth; }
 

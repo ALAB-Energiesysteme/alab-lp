@@ -311,7 +311,8 @@
 
 
 
-<section id="alab-planer" class="alab-planer alab-contact">
+
+<section id="alab-planer" class="alab-contact">
   <div class="alab-contact__container">
 
     
@@ -319,7 +320,9 @@
       <div class="alab-contact__form-section">
         <div class="alab-contact__header">
           <h1 class="alab-contact__title">Jetzt PV-Anlage berechnen</h1>
-          <p class="alab-contact__subtitle">Adresse eingeben und in 2 Minuten die passende Photovoltaik-Anlage für Ihr Dach berechnen</p>
+          <p class="alab-contact__subtitle">
+            Adresse eingeben und in 2 Minuten die passende Photovoltaik-Anlage für Ihr Dach berechnen
+          </p>
         </div>
 
         <div class="alab-contact__address-group">
@@ -327,10 +330,12 @@
             <span class="alab-contact__label-text">Ihre Adresse</span>
             <span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
           </label>
+
           <div class="alab-contact__input-wrapper">
             <svg class="alab-contact__input-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
             </svg>
+
             <input
               type="text"
               id="addressSearch"
@@ -340,7 +345,7 @@
               required
               aria-required="true"
               aria-describedby="addressSearch-error"
-            >
+            />
           </div>
           <div id="addressSearch-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
         </div>
@@ -348,13 +353,11 @@
 
       <div class="alab-contact__image-section">
         <img
-          src="/assets/img/03-planer/plan.avif"
+          src="https://static.wixstatic.com/media/cac2b9_dbe6d3a2c49a4225841406069172d3ba~mv2.png"
           alt="Haus mit moderner Photovoltaikanlage auf dem Dach"
           class="alab-contact__hero-image"
-          loading="lazy"
-          width="800"
-          height="533"
-        >
+          loading="lazy" width="800" height="533"
+        />
       </div>
     </div>
 
@@ -365,6 +368,7 @@
           <button class="alab-contact__back-btn" onclick="window.ALAB_CONTACT_APP.goToStep(1)" aria-label="Zurück">
             <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
           </button>
+
           <div class="alab-contact__step-nav">
             <span class="alab-contact__step-nav-item alab-contact__step-nav-item--active">Dachfläche</span>
             <span class="alab-contact__step-nav-separator">→</span>
@@ -378,25 +382,21 @@
           <div class="alab-contact__map-main">
             <h2 class="alab-contact__map-title">Markieren Sie Ihr Dach auf der Karte</h2>
             <p class="alab-contact__map-description">
-              <strong>So geht's:</strong> Klicken Sie oben in der Karte auf das <strong>Polygon-Symbol</strong>
-              <svg viewBox="0 0 24 24" width="16" height="16" style="display:inline-block;vertical-align:middle;fill:#E6C23C;">
-                <path d="M2 20h20v2H2v-2zm2-8l4-4v12H4V12zm6 0l4-4v12h-4V12zm6-8l4 4v12h-4V4z"/>
-              </svg>
-              und zeichnen Sie Ihr Dach ein. Schließen Sie die Form durch Klick auf den Startpunkt.
+              <strong>So geht's:</strong> Klicken Sie oben in der Karte auf das <strong>Polygon-Symbol</strong> und zeichnen Sie Ihr Dach ein.
             </p>
 
             <div id="mainMap" class="alab-contact__map-large"></div>
 
             <div class="alab-contact__map-hints">
-              <p>Störflächen (Kamine, Dachfenster) können nach der Grundfläche ebenfalls markiert werden.</p>
-              <p>Mehrere Dachflächen? Einfach nacheinander zeichnen.</p>
+              <p>Wenn Sie mit der Grundfläche fertig sind, können Sie Störflächen markieren.</p>
+              <p>Mehrere Dachflächen sind nacheinander möglich.</p>
             </div>
           </div>
 
           <div class="alab-contact__map-sidebar">
             <div class="alab-contact__roof-info">
               <h3>Dachfläche markieren</h3>
-              <p class="alab-contact__instruction">Nutzen Sie das Polygon-Werkzeug oben in der Karte, um Ihr Dach einzuzeichnen.</p>
+              <p class="alab-contact__instruction">Nutzen Sie das Polygon-Werkzeug oben in der Karte.</p>
 
               <div class="alab-contact__roof-display">
                 <span class="alab-contact__roof-label">Markierte Fläche:</span>
@@ -406,10 +406,10 @@
               <div class="alab-contact__divider"></div>
 
               <label class="alab-contact__manual-label">
-                <input type="checkbox" id="manualInput" onchange="window.ALAB_CONTACT_APP.toggleManualInput()">
+                <input type="checkbox" id="manualInput" onchange="window.ALAB_CONTACT_APP.toggleManualInput()"/>
                 <span>Oder Dachgröße manuell eingeben</span>
               </label>
-              <input type="number" id="manualRoofSize" class="alab-contact__manual-input" style="display:none;" min="10" max="500" placeholder="z.B. 120">
+              <input type="number" id="manualRoofSize" class="alab-contact__manual-input" style="display:none;" min="10" max="500" placeholder="z. B. 120"/>
             </div>
 
             <button class="alab-contact__submit" onclick="window.ALAB_CONTACT_APP.goToStep(3)">
@@ -428,6 +428,7 @@
           <button class="alab-contact__back-btn" onclick="window.ALAB_CONTACT_APP.goToStep(2)" aria-label="Zurück">
             <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
           </button>
+
           <div class="alab-contact__step-nav">
             <span class="alab-contact__step-nav-item alab-contact__step-nav-item--done">Dachfläche</span>
             <span class="alab-contact__step-nav-separator">→</span>
@@ -446,7 +447,7 @@
           </div>
 
           <div class="alab-contact__consumption-form">
-            <h3>Bedarfsanalyse: Wie hoch ist Ihr jährlicher Stromverbrauch?</h3>
+            <h3>Bedarfsanalyse</h3>
 
             <div class="alab-contact__form-row">
               <div class="alab-contact__form-group">
@@ -462,22 +463,25 @@
 
               <div class="alab-contact__form-group">
                 <label class="alab-contact__label">Wohnfläche (m²)</label>
-                <input type="number" id="livingArea" class="alab-contact__input" value="160" min="50" max="500" onchange="window.ALAB_CONTACT_APP.calculateConsumption()">
+                <input type="number" id="livingArea" class="alab-contact__input" value="160" min="50" max="500" onchange="window.ALAB_CONTACT_APP.calculateConsumption()"/>
               </div>
             </div>
 
             <div class="alab-contact__form-group">
-              <label class="alab-contact__label">Vorhandene oder geplante Stromverbraucher</label>
+              <label class="alab-contact__label">Verbraucher</label>
+
               <label class="alab-contact__checkbox-wrapper">
-                <input type="checkbox" id="warmwater" class="alab-contact__checkbox" onchange="window.ALAB_CONTACT_APP.calculateConsumption()">
+                <input type="checkbox" id="warmwater" class="alab-contact__checkbox" onchange="window.ALAB_CONTACT_APP.calculateConsumption()"/>
                 <span class="alab-contact__checkbox-label">Elektrische Warmwasserbereitung</span>
               </label>
+
               <label class="alab-contact__checkbox-wrapper">
-                <input type="checkbox" id="heatpump" class="alab-contact__checkbox" onchange="window.ALAB_CONTACT_APP.calculateConsumption()">
+                <input type="checkbox" id="heatpump" class="alab-contact__checkbox" onchange="window.ALAB_CONTACT_APP.calculateConsumption()"/>
                 <span class="alab-contact__checkbox-label">Wärmepumpe</span>
               </label>
+
               <label class="alab-contact__checkbox-wrapper">
-                <input type="checkbox" id="ecar" class="alab-contact__checkbox" onchange="window.ALAB_CONTACT_APP.calculateConsumption()">
+                <input type="checkbox" id="ecar" class="alab-contact__checkbox" onchange="window.ALAB_CONTACT_APP.calculateConsumption()"/>
                 <span class="alab-contact__checkbox-label">E-Auto</span>
               </label>
             </div>
@@ -495,6 +499,7 @@
           <button class="alab-contact__back-btn" onclick="window.ALAB_CONTACT_APP.goToStep(3)" aria-label="Zurück">
             <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
           </button>
+
           <div class="alab-contact__step-nav">
             <span class="alab-contact__step-nav-item alab-contact__step-nav-item--done">Dachfläche</span>
             <span class="alab-contact__step-nav-separator">→</span>
@@ -510,6 +515,7 @@
         </div>
 
         <form id="contactForm" class="alab-contact__form" novalidate>
+          
           <input type="hidden" id="latitude" name="latitude">
           <input type="hidden" id="longitude" name="longitude">
           <input type="hidden" id="formatted_address" name="formatted_address">
@@ -522,17 +528,21 @@
           <div class="alab-contact__form-row">
             <div class="alab-contact__form-group">
               <label for="firstName" class="alab-contact__label">
-                <span class="alab-contact__label-text">Vorname</span><span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
+                <span class="alab-contact__label-text">Vorname</span>
+                <span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
               </label>
-              <input type="text" id="firstName" name="firstName" class="alab-contact__input" required aria-required="true" aria-describedby="firstName-error" minlength="2" maxlength="50">
+              <input type="text" id="firstName" name="firstName" class="alab-contact__input"
+                     required aria-required="true" aria-describedby="firstName-error" minlength="2" maxlength="50">
               <div id="firstName-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="alab-contact__form-group">
               <label for="lastName" class="alab-contact__label">
-                <span class="alab-contact__label-text">Nachname</span><span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
+                <span class="alab-contact__label-text">Nachname</span>
+                <span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
               </label>
-              <input type="text" id="lastName" name="lastName" class="alab-contact__input" required aria-required="true" aria-describedby="lastName-error" minlength="2" maxlength="50">
+              <input type="text" id="lastName" name="lastName" class="alab-contact__input"
+                     required aria-required="true" aria-describedby="lastName-error" minlength="2" maxlength="50">
               <div id="lastName-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
             </div>
           </div>
@@ -540,39 +550,50 @@
           <div class="alab-contact__form-row">
             <div class="alab-contact__form-group">
               <label for="email" class="alab-contact__label">
-                <span class="alab-contact__label-text">E-Mail-Adresse</span><span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
+                <span class="alab-contact__label-text">E-Mail-Adresse</span>
+                <span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
               </label>
-              <input type="email" id="email" name="email" class="alab-contact__input" required aria-required="true" aria-describedby="email-error" maxlength="100">
+              <input type="email" id="email" name="email" class="alab-contact__input"
+                     required aria-required="true" aria-describedby="email-error" maxlength="100">
               <div id="email-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="alab-contact__form-group">
               <label for="phone" class="alab-contact__label">
-                <span class="alab-contact__label-text">Telefonnummer</span><span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
+                <span class="alab-contact__label-text">Telefonnummer</span>
+                <span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
               </label>
-              <input type="tel" id="phone" name="phone" class="alab-contact__input" required aria-required="true" aria-describedby="phone-error" pattern="^[\\d\\s\\+\\-\\(\\)\\/]+$" maxlength="20">
+              <input type="tel" id="phone" name="phone" class="alab-contact__input"
+                     required aria-required="true" aria-describedby="phone-error"
+                     pattern="^[\d\s\+\-\(\)\/]+$" maxlength="20">
               <div id="phone-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
             </div>
           </div>
 
           <div class="alab-contact__form-group">
-            <label for="message" class="alab-contact__label"><span class="alab-contact__label-text">Ihre Nachricht (optional)</span></label>
-            <textarea id="message" name="message" class="alab-contact__textarea" rows="4" aria-describedby="message-hint" maxlength="1000"></textarea>
+            <label for="message" class="alab-contact__label">
+              <span class="alab-contact__label-text">Ihre Nachricht (optional)</span>
+            </label>
+            <textarea id="message" name="message" class="alab-contact__textarea" rows="4"
+                      aria-describedby="message-hint" maxlength="1000"></textarea>
             <div id="message-hint" class="alab-contact__hint">Teilen Sie uns Ihre Wünsche und Fragen mit</div>
           </div>
 
           <div class="alab-contact__form-group">
             <div class="alab-contact__checkbox-wrapper">
-              <input type="checkbox" id="privacy" name="privacy" class="alab-contact__checkbox" required aria-required="true" aria-describedby="privacy-error">
+              <input type="checkbox" id="privacy" name="privacy" class="alab-contact__checkbox"
+                     required aria-required="true" aria-describedby="privacy-error">
               <label for="privacy" class="alab-contact__checkbox-label">
-                Ich habe die <a href="#" class="alab-contact__link" target="_blank" rel="noopener">Datenschutzerklärung</a> zur Kenntnis genommen und stimme der Verarbeitung meiner Daten zu.
+                Ich habe die <a href="https://www.alabenergiesysteme.de/datenschutz/" class="alab-contact__link" target="_blank" rel="noopener">Datenschutzerklärung</a> zur Kenntnis genommen und stimme der Verarbeitung meiner Daten zu.
                 <span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
               </label>
             </div>
             <div id="privacy-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
           </div>
 
-          <button type="submit" class="alab-contact__submit" aria-label="Kontaktformular absenden">Kostenlose Beratung anfordern</button>
+          <button type="submit" class="alab-contact__submit" aria-label="Kontaktformular absenden">
+            Kostenlose Beratung anfordern
+          </button>
         </form>
       </div>
     </div>
@@ -584,16 +605,23 @@
           <path fill="#4CAF50" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
         </svg>
         <h2 class="alab-contact__success-title">Vielen Dank für Ihre Anfrage!</h2>
-        <p class="alab-contact__success-text">Wir melden uns innerhalb von 24 Stunden.</p>
-        <a href="/" class="alab-contact__submit">Zur Startseite</a>
+        <p class="alab-contact__success-text">Wir haben Ihre Nachricht erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+        <a href="https://www.alabenergiesysteme.de/" class="alab-contact__submit">Zur Startseite</a>
       </div>
     </div>
 
   </div>
-
-  
-<script defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places,drawing,geometry&callback=initGoogleMaps"></script>
 </section>
+
+
+<script>
+  window.initGoogleMaps = window.initGoogleMaps || function () {
+    (window._mapsReadyQ = window._mapsReadyQ || []).push(true);
+  };
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlkpSm0yCzMsn5S2NSLlUaNyW66-YstqA&libraries=places,drawing,geometry&callback=initGoogleMaps"></script>
+<script src="/assets/03-planer/app.js" defer></script>
+
 <section class="pv-process" id="pv-process" aria-label="Ihr Weg zur PV-Anlage">
   <div class="pv-process__header">
     <span class="pv-process__badge">SO EINFACH GEHT'S</span>

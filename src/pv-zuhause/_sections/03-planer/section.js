@@ -3,8 +3,9 @@
    ============================================ */
 (function () {
   'use strict';
+// >>> HIER DEINE MAKE WEBHOOK URL EINTRAGEN <<<
+const MAKE_WEBHOOK_URL = 'https://hook.eu2.make.com/yloo9gmjoxtsua7r2g5z6af9lqs0ei3y'; 
 
-  // ---- State ----
   const state = {
     currentStep: 1,
     map: null,
@@ -17,23 +18,57 @@
     isSubmitting: false
   };
 
-  // ---- Config ----
   const CONFIG = {
-    defaultCenter: { lat: 48.0446, lng: 10.4897 }, // Mindelheim
+    defaultCenter: { lat: 48.0446, lng: 10.4897 },
     mapOptions: {
-      zoom: 19,
-      mapTypeId: 'satellite',
-      disableDefaultUI: false,
-      zoomControl: true,
-      streetViewControl: false,
-      mapTypeControl: true,
-      fullscreenControl: false,
-      gestureHandling: 'greedy',
-      tilt: 0
+      zoom: 19, mapTypeId: 'satellite', disableDefaultUI: false,
+      zoomControl: true, streetViewControl: false, mapTypeControl: true,
+      fullscreenControl: false, gestureHandling: 'greedy', tilt: 0
     }
   };
+  async function sendToMake(payload) {
+  const url = MAKE_WEBHOOK_URL;
+  const json = JSON.stringify(payload);
 
-  // ---- Fehlertexte ----
+  // 1) Normales fetch (mit CORS + keepalive)
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: json,
+      mode: 'cors',
+      keepalive: true
+    });
+    if (res.ok) return true;
+  } catch (e) {
+    console.warn('fetch → Make fehlgeschlagen:', e);
+  }
+
+  // 2) Fallback: sendBeacon (super robust bei Tab-Schließen/Navi)
+  try {
+    const blob = new Blob([json], { type: 'application/json' });
+    if (navigator.sendBeacon && navigator.sendBeacon(url, blob)) {
+      return true;
+    }
+  } catch (e) {
+    console.warn('sendBeacon → Make fehlgeschlagen:', e);
+  }
+
+  // 3) Letzter Fallback: FormData ohne CORS-Leserechte
+  try {
+    const fd = new FormData();
+    fd.append('payload', json);
+    await fetch(url, { method: 'POST', body: fd, mode: 'no-cors', keepalive: true });
+    // no-cors gibt uns keinen Status zurück – wir gehen von OK aus
+    return true;
+  } catch (e) {
+    console.error('Alle Make-Sendeversuche fehlgeschlagen:', e);
+  }
+
+  return false;
+}
+
+
   const ERRORS = {
     required: 'Dieses Feld ist erforderlich.',
     email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
@@ -43,7 +78,6 @@
     privacy: 'Bitte stimmen Sie der Datenschutzerklärung zu.'
   };
 
-  // ---- DOM-Cache ----
   const elements = {
     form: null,
     addressSearch: null,
@@ -53,17 +87,11 @@
     steps: {}
   };
 
-  // ---------------- Init ----------------
   function init() {
     cacheElements();
-    if (!elements.form) {
-      console.error('Contact form not found');
-      return;
-    }
+    if (!elements.form) return;
     setupEventListeners();
     setupFormValidation();
-
-    
   }
 
   function cacheElements() {
@@ -72,74 +100,35 @@
     elements.successMessage = document.getElementById('successMessage');
     elements.submitButton = elements.form?.querySelector('.alab-contact__submit');
 
-    // Steps 1..4
-    for (let i = 1; i <= 4; i++) {
-      elements.steps[`step${i}`] = document.getElementById(`step${i}`);
+    // Steps 1..5 (Step 5 = successMessage)
+    for (let i = 1; i <= 5; i++) {
+      const id = i === 5 ? 'successMessage' : `step${i}`;
+      elements.steps[`step${i}`] = document.getElementById(id);
     }
-    // Step 5 (Success)
-    elements.steps['step5'] = document.getElementById('successMessage');
 
-    // Hidden Fields
-    ['latitude', 'longitude', 'formatted_address', 'postal_code', 'locality', 'route', 'street_number', 'country']
+    ['latitude','longitude','formatted_address','postal_code','locality','route','street_number','country']
       .forEach(id => elements.hiddenFields[id] = document.getElementById(id));
   }
 
   function setupEventListeners() {
-    // Submit
     elements.form.addEventListener('submit', handleFormSubmit);
 
-    // Inline-Validation
     const inputs = elements.form.querySelectorAll('input:not([type="hidden"]), textarea');
     inputs.forEach(input => {
       input.addEventListener('blur', () => validateField(input), { passive: true });
-      input.addEventListener('input', () => {
-        if (input.classList.contains('is-invalid')) validateField(input);
-      }, { passive: true });
+      input.addEventListener('input', () => { if (input.classList.contains('is-invalid')) validateField(input); }, { passive: true });
     });
 
-    // Datenschutz-Häkchen
-    const privacyCheckbox = document.getElementById('privacy');
-    privacyCheckbox?.addEventListener('change', () => validateField(privacyCheckbox));
-
-    // Adresseingabe – sauberer Flow
-    if (elements.addressSearch) {
-      // Eingabe löscht alte Place-Daten, damit nichts "klebt"
-      elements.addressSearch.addEventListener('input', () => {
-        state.selectedPlace = null;
-        for (const k in elements.hiddenFields) elements.hiddenFields[k].value = '';
-        clearFieldError(elements.addressSearch);
-      });
-
-      // Blur zeigt ggfs. Fehlermeldung
-      elements.addressSearch.addEventListener('blur', () => {
-        if (!elements.hiddenFields.latitude?.value) {
-          showFieldError(elements.addressSearch, ERRORS.address);
-        } else {
-          clearFieldError(elements.addressSearch);
-        }
-      });
-
-      // Enter ohne Auswahl → Geocoder-Fallback
-      elements.addressSearch.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          handlePlaceSelect();
-        }
-      });
-    }
+    const privacy = document.getElementById('privacy');
+    privacy?.addEventListener('change', () => validateField(privacy));
   }
 
-  // ---------------- Google Callback ----------------
+  // Called by Google Maps callback
   window.initGoogleMaps = function () {
-    if (!window.google?.maps) {
-      console.error('Google Maps API failed to load');
-      alert('Google Maps konnte nicht geladen werden. Bitte laden Sie die Seite neu.');
-      return;
-    }
+    if (!window.google?.maps) return;
     initAutocomplete();
   };
 
-  // ---------------- Places Autocomplete ----------------
   function initAutocomplete() {
     if (!elements.addressSearch || !window.google?.maps?.places) return;
 
@@ -153,95 +142,62 @@
   }
 
   function handlePlaceSelect() {
-    if (!window.google?.maps) {
-      console.warn('Google Maps not loaded yet');
+    const place = state.autocomplete.getPlace();
+    if (!place.geometry?.location) {
+      showFieldError(elements.addressSearch, ERRORS.address);
       return;
     }
 
-    const place = state.autocomplete?.getPlace?.();
-
-    // Enter ohne Auswahl → place hat keine Geometrie → Geocoder-Fallback
-    if (!place?.geometry?.location) {
-      const raw = elements.addressSearch.value.trim();
-      if (!raw) {
-        showFieldError(elements.addressSearch, ERRORS.address);
-        return;
-      }
-      const geocoder = new google.maps.Geocoder();
-      geocoder.geocode(
-        { address: raw, componentRestrictions: { country: 'DE' } },
-        (results, status) => {
-          if (status === 'OK' && results[0]) {
-            clearFieldError(elements.addressSearch);
-            state.selectedPlace = results[0];
-            const addressData = extractAddressComponents(results[0]);
-            populateHiddenFields(addressData);
-            goToStep(2);
-            setTimeout(() => initializeMap(results[0].geometry.location), 100);
-          } else {
-            showFieldError(elements.addressSearch, ERRORS.address);
-          }
-        }
-      );
-      return;
-    }
-
-    // Normalfall: Auswahl aus der Liste
     clearFieldError(elements.addressSearch);
     state.selectedPlace = place;
+
     const addressData = extractAddressComponents(place);
     populateHiddenFields(addressData);
+
     goToStep(2);
     setTimeout(() => initializeMap(place.geometry.location), 100);
   }
 
-  // ---------------- Map & Zeichnen ----------------
+  function extractAddressComponents(place) {
+    const comps = place.address_components || [];
+    const data = {
+      latitude: place.geometry.location.lat(),
+      longitude: place.geometry.location.lng(),
+      formatted_address: place.formatted_address || '',
+      postal_code: '', locality: '', route: '', street_number: '', country: ''
+    };
+    const map = { street_number:'street_number', route:'route', locality:'locality', postal_code:'postal_code', country:'country' };
+    comps.forEach(c => { const t = c.types[0]; if (map[t]) data[map[t]] = c.long_name; });
+    return data;
+  }
+
+  function populateHiddenFields(data) {
+    Object.keys(data).forEach(k => { if (elements.hiddenFields[k]) elements.hiddenFields[k].value = data[k]; });
+  }
+
   function initializeMap(location) {
-    const mapElement = document.getElementById('mainMap');
-    if (!window.google?.maps || !mapElement) return;
+    if (!window.google?.maps) return;
+    const el = document.getElementById('mainMap'); if (!el) return;
 
-    state.map = new google.maps.Map(mapElement, { ...CONFIG.mapOptions, center: location });
+    state.map = new google.maps.Map(el, { ...CONFIG.mapOptions, center: location });
 
-    // Marker (drag → Koordinaten aktualisieren)
-    if (state.marker) state.marker.setMap(null);
-    state.marker = new google.maps.Marker({ map: state.map, position: location, draggable: true });
-    google.maps.event.addListener(state.marker, 'dragend', handleMarkerDragEnd);
-
-    if (!google.maps.drawing) {
-      console.error('Google Maps Drawing library not loaded');
-      alert('Das Zeichentool konnte nicht geladen werden. Bitte nutzen Sie die manuelle Eingabe.');
-      return;
-    }
+    if (!window.google.maps.drawing) return;
 
     const drawingManager = new google.maps.drawing.DrawingManager({
       drawingMode: google.maps.drawing.OverlayType.POLYGON,
       drawingControl: true,
-      drawingControlOptions: {
-        position: google.maps.ControlPosition.TOP_CENTER,
-        drawingModes: [google.maps.drawing.OverlayType.POLYGON]
-      },
-      polygonOptions: {
-        fillColor: '#E6C23C',
-        fillOpacity: 0.4,
-        strokeColor: '#E6C23C',
-        strokeOpacity: 0.9,
-        strokeWeight: 2,
-        editable: true,
-        draggable: false
-      }
+      drawingControlOptions: { position: google.maps.ControlPosition.TOP_CENTER, drawingModes: [google.maps.drawing.OverlayType.POLYGON] },
+      polygonOptions: { fillColor:'#E6C23C', fillOpacity:0.4, strokeColor:'#E6C23C', strokeOpacity:0.9, strokeWeight:2, editable:true, draggable:false }
     });
-
     drawingManager.setMap(state.map);
 
-    google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
+    google.maps.event.addListener(drawingManager, 'polygoncomplete', (polygon) => {
       drawingManager.setDrawingMode(null);
       if (state.polygon) state.polygon.setMap(null);
       state.polygon = polygon;
       calculateRoofArea(polygon);
-
-      polygon.getPath().addListener('set_at', () => calculateRoofArea(polygon));
-      polygon.getPath().addListener('insert_at', () => calculateRoofArea(polygon));
-      polygon.getPath().addListener('remove_at', () => calculateRoofArea(polygon));
+      const path = polygon.getPath();
+      ['set_at','insert_at','remove_at'].forEach(evt => google.maps.event.addListener(path, evt, () => calculateRoofArea(polygon)));
     });
   }
 
@@ -249,135 +205,83 @@
     if (!window.google?.maps?.geometry) return;
     const area = google.maps.geometry.spherical.computeArea(polygon.getPath());
     state.roofArea = Math.round(area);
-    const el = document.getElementById('roofSizeDisplay');
-    if (el) el.textContent = `${state.roofArea} m²`;
+    const out = document.getElementById('roofSizeDisplay'); if (out) out.textContent = `${state.roofArea} m²`;
   }
 
-  function handleMarkerDragEnd() {
-    if (!state.marker) return;
-    const pos = state.marker.getPosition();
-    const lat = pos.lat();
-    const lng = pos.lng();
-    if (elements.hiddenFields.latitude) elements.hiddenFields.latitude.value = lat;
-    if (elements.hiddenFields.longitude) elements.hiddenFields.longitude.value = lng;
-    reverseGeocode(lat, lng);
-  }
+  function goToStep(stepNumber, opts = {}) {
+  const { scroll = false } = opts;          // standard: NICHT scrollen
 
-  function reverseGeocode(lat, lng) {
-    if (!window.google?.maps) return;
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-      if (status === 'OK' && results[0]) {
-        const data = extractAddressComponents(results[0]);
-        data.latitude = lat;
-        data.longitude = lng;
-        populateHiddenFields(data);
-      }
-    });
-  }
+  Object.values(elements.steps).forEach(step => step?.classList.remove('alab-contact__step--active'));
+  const targetStep = elements.steps[`step${stepNumber}`];
+  if (targetStep) {
+    targetStep.classList.add('alab-contact__step--active');
+    state.currentStep = stepNumber;
 
-  // ---------------- Helpers ----------------
-  function extractAddressComponents(place) {
-    const components = place.address_components || [];
-    const data = {
-      latitude: place.geometry.location.lat(),
-      longitude: place.geometry.location.lng(),
-      formatted_address: place.formatted_address || '',
-      postal_code: '',
-      locality: '',
-      route: '',
-      street_number: '',
-      country: ''
-    };
-    const map = {
-      street_number: 'street_number',
-      route: 'route',
-      locality: 'locality',
-      postal_code: 'postal_code',
-      country: 'country'
-    };
-    components.forEach(c => {
-      const type = c.types[0];
-      if (map[type]) data[map[type]] = c.long_name;
-    });
-    return data;
-  }
-
-  function populateHiddenFields(data) {
-    Object.keys(data).forEach(k => {
-      if (elements.hiddenFields[k]) elements.hiddenFields[k].value = data[k];
-    });
-  }
-
-  function goToStep(stepNumber) {
-    Object.values(elements.steps).forEach(step => step?.classList.remove('alab-contact__step--active'));
-    const target = elements.steps[`step${stepNumber}`];
-    if (target) {
-      target.classList.add('alab-contact__step--active');
-      state.currentStep = stepNumber;
+    if (scroll) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (stepNumber === 2 && state.map) {
-        setTimeout(() => google.maps.event.trigger(state.map, 'resize'), 150);
-      }
+    }
+
+    if (stepNumber === 2 && state.map) {
+      setTimeout(() => google.maps.event.trigger(state.map, 'resize'), 150);
     }
   }
+}
+
 
   function toggleManualInput() {
     const checkbox = document.getElementById('manualInput');
-    const manualInput = document.getElementById('manualRoofSize');
-    const roofSizeDisplay = document.getElementById('roofSizeDisplay');
+    const manual = document.getElementById('manualRoofSize');
+    const display = document.getElementById('roofSizeDisplay');
 
-    if (checkbox && checkbox.checked) {
-      manualInput.style.display = 'block';
-      roofSizeDisplay.style.display = 'none';
-      manualInput.focus();
-      manualInput.addEventListener('input', function () {
-        state.roofArea = parseInt(this.value, 10) || 0;
-      });
+    if (checkbox?.checked) {
+      manual.style.display = 'block';
+      display.style.display = 'none';
+      manual.focus();
+      if (!manual._bound) {
+        manual.addEventListener('input', function () { state.roofArea = parseInt(this.value, 10) || 0; });
+        manual._bound = true;
+      }
     } else {
-      manualInput.style.display = 'none';
-      roofSizeDisplay.style.display = 'block';
+      manual.style.display = 'none';
+      display.style.display = 'block';
     }
   }
 
   function calculateConsumption() {
-    const persons = parseInt(document.getElementById('persons')?.value, 10) || 4;
-    const livingArea = parseInt(document.getElementById('livingArea')?.value, 10) || 160;
-    const warmwater = document.getElementById('warmwater')?.checked || false;
-    const heatpump = document.getElementById('heatpump')?.checked || false;
-    const ecar = document.getElementById('ecar')?.checked || false;
+    const persons = parseInt(document.getElementById('persons')?.value) || 4;
+    const living = parseInt(document.getElementById('livingArea')?.value) || 160;
+    const warmwater = !!document.getElementById('warmwater')?.checked;
+    const heatpump  = !!document.getElementById('heatpump')?.checked;
+    const ecar      = !!document.getElementById('ecar')?.checked;
 
-    let consumption = 1000 + persons * 500 + livingArea * 10;
-    if (warmwater) consumption += 800;
-    if (heatpump) consumption += 3000;
-    if (ecar) consumption += 2500;
+    let kwh = 1000 + (persons * 500) + (living * 10);
+    if (warmwater) kwh += 800;
+    if (heatpump)  kwh += 3000;
+    if (ecar)      kwh += 2500;
 
-    state.consumption = consumption;
-    const el = document.getElementById('consumptionValue');
-    if (el) el.textContent = `${consumption.toLocaleString('de-DE')} kWh`;
+    state.consumption = kwh;
+    const el = document.getElementById('consumptionValue'); if (el) el.textContent = `${kwh.toLocaleString('de-DE')} kWh`;
   }
 
-  function setupFormValidation() {
-    // Platzhalter für individuelle Regeln – HTML5 ist via novalidate deaktiviert
-  }
+  function setupFormValidation() {}
 
   function validateField(field) {
     const value = field.type === 'checkbox' ? field.checked : field.value.trim();
-    const type = field.type;
-    const id = field.id;
     let error = '';
 
-    if (field.required && ((type !== 'checkbox' && !value) || (type === 'checkbox' && !field.checked))) {
-      error = (type === 'checkbox') ? ERRORS.privacy : ERRORS.required;
+    if (field.required && field.type !== 'checkbox' && !value) error = ERRORS.required;
+    if (field.required && field.type === 'checkbox' && !value) error = ERRORS.privacy;
+
+    if (!error && field.type === 'email' && field.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) error = ERRORS.email;
+    if (!error && field.type === 'tel' && field.value) {
+      const ok = /^[\d\s\+\-\(\)\/]+$/.test(field.value) && field.value.replace(/\s/g,'').length >= 6;
+      if (!ok) error = ERRORS.phone;
     }
 
-    if (!error && value && type === 'email' && !isValidEmail(field.value)) error = ERRORS.email;
-    if (!error && value && type === 'tel' && !isValidPhone(field.value)) error = ERRORS.phone;
+    const min = parseInt(field.getAttribute('minlength') || '0', 10);
+    if (!error && min && field.value.length < min) error = ERRORS.minLength(min);
 
-    const minLength = parseInt(field.getAttribute('minlength'), 10);
-    if (!error && minLength && field.value.trim().length < minLength) error = ERRORS.minLength(minLength);
-
-    if (id === 'addressSearch' && !elements.hiddenFields.latitude?.value) error = ERRORS.address;
+    if (field.id === 'addressSearch' && !elements.hiddenFields.latitude?.value) error = ERRORS.address;
 
     if (error) { showFieldError(field, error); return false; }
     clearFieldError(field); return true;
@@ -385,96 +289,114 @@
 
   function validateForm() {
     const inputs = elements.form.querySelectorAll('input:not([type="hidden"]), textarea');
-    let isValid = true;
-    inputs.forEach(i => { if (!validateField(i)) isValid = false; });
-    return isValid;
+    let valid = true; inputs.forEach(i => { if (!validateField(i)) valid = false; }); return valid;
   }
 
-  function showFieldError(field, message) {
-    field.setAttribute('aria-invalid', 'true');
-    field.classList.add('is-invalid');
-    const errorId = field.getAttribute('aria-describedby');
-    const el = document.getElementById(errorId);
-    if (el) el.textContent = message;
+  function showFieldError(field, msg) {
+    field.setAttribute('aria-invalid','true'); field.classList.add('is-invalid');
+    const id = field.getAttribute('aria-describedby'); const el = id && document.getElementById(id); if (el) el.textContent = msg;
   }
 
   function clearFieldError(field) {
-    field.setAttribute('aria-invalid', 'false');
-    field.classList.remove('is-invalid');
-    const errorId = field.getAttribute('aria-describedby');
-    const el = document.getElementById(errorId);
-    if (el) el.textContent = '';
+    field.setAttribute('aria-invalid','false'); field.classList.remove('is-invalid');
+    const id = field.getAttribute('aria-describedby'); const el = id && document.getElementById(id); if (el) el.textContent = '';
   }
 
-  // ---------------- Submit ----------------
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    if (state.isSubmitting) return;
+// ⬇️ NEU: Minimal-Payload wie in Bild 2 + Source
+function collectFormData() {
+  const fd = new FormData(elements.form);
+  const h  = elements.hiddenFields;
 
-    if (!validateForm()) {
-      const firstInvalid = elements.form.querySelector('[aria-invalid="true"]');
-      firstInvalid?.focus();
-      return;
-    }
+  return {
+    // Adresse (nur die gewünschten Teile)
+    "Postleitzahl":  h.postal_code?.value || "",
+    "Ort":           h.locality?.value     || "",
+    "Route":         h.route?.value        || "",
+    "Hausnummer":    h.street_number?.value|| "",
+    "Land":          h.country?.value      || "",
 
-    state.isSubmitting = true;
-    elements.submitButton.classList.add('is-loading');
-    elements.submitButton.disabled = true;
+    // Kontakt
+    "Vorname":       (fd.get("firstName") || "").trim(),
+    "Nachname":      (fd.get("lastName")  || "").trim(),
+    "E-Mail":        (fd.get("email")     || "").trim(),
+    "Telefon":       (fd.get("phone")     || "").trim(),
+    "Nachricht":     (fd.get("message")   || "").trim(),
 
-    const data = collectFormData();
+    // Zustimmungen
+    "Datenschutz":   fd.get("privacy") ? "an" : "aus",
 
-    // TODO: echten Endpoint verwenden
-    setTimeout(() => handleSubmitSuccess(data), 1200);
+    // Berechnungen
+    "Dachfläche_m2": state.roofArea || 0,
+    "Verbrauch_kWh": state.consumption || 0,
+
+    // Quelle
+    "Source": "Landingpage_pv-zuhause"
+  };
+}
+
+
+ async function handleFormSubmit(event) {
+  event.preventDefault();
+  if (state.isSubmitting) return;
+
+  // Validierung
+  if (!validateForm()) {
+    const firstInvalid = elements.form.querySelector('[aria-invalid="true"]');
+    if (firstInvalid) firstInvalid.focus();
+    return;
   }
 
-  function collectFormData() {
-    const formData = new FormData(elements.form);
-    const data = {};
-    for (const [k, v] of formData.entries()) data[k] = v;
-    return data;
-  }
+  // Loading
+  state.isSubmitting = true;
+  elements.submitButton.classList.add('is-loading');
+  elements.submitButton.disabled = true;
 
-  function handleSubmitSuccess(data) {
-    console.log('Form submitted:', data);
-    goToStep(5); // Success-Step anzeigen
-    sendTrackingEvents();
+  // Daten einsammeln
+  const payload = collectFormData();
+
+  // An Make senden
+  const ok = await sendToMake(payload);
+
+  if (ok) {
+    // Erfolg
+    handleSubmitSuccess(payload);
+  } else {
+    // Fehler sichtbar machen (Basic)
+    alert('Die Anfrage konnte nicht übertragen werden. Bitte später erneut versuchen.');
     state.isSubmitting = false;
     elements.submitButton.classList.remove('is-loading');
     elements.submitButton.disabled = false;
   }
+}
+
+
+  function handleSubmitSuccess(data) {
+    console.log('Form submitted:', data);
+    goToStep(5);
+    sendTrackingEvents();
+    state.isSubmitting = false;
+    elements.submitButton.classList.remove('is-loading'); elements.submitButton.disabled = false;
+  }
 
   function sendTrackingEvents() {
-    window.dataLayer?.push({ event: 'contact_form_sent', form_location: 'alab-contact' });
-
-    if (window.parent !== window) {
-      window.parent.postMessage({ type: 'contact_form_sent', form_location: 'alab-contact' }, '*');
-    }
-
+    window.dataLayer && window.dataLayer.push({ event: 'contact_form_sent', form_location: 'alab-contact' });
+    if (window.parent !== window) window.parent.postMessage({ type: 'contact_form_sent', form_location: 'alab-contact' }, '*');
     window.dispatchEvent(new CustomEvent('contact_form_sent', { detail: { form_location: 'alab-contact' } }));
   }
 
-  // ---------------- Utils ----------------
-  function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-  function isValidPhone(phone) {
-    const re = /^[\d\s\+\-\(\)\/]+$/;
-    const cleaned = phone.replace(/\s/g, '');
-    return re.test(phone) && cleaned.length >= 6 && cleaned.length <= 20;
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 
-  // ---------------- Boot ----------------
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  // Public API
+  window.ALAB_CONTACT_APP = { goToStep, toggleManualInput, calculateConsumption, state };
 
-  // Public API (für Buttons in deinem HTML)
-  window.ALAB_CONTACT_APP = {
-    goToStep,
-    toggleManualInput,
-    calculateConsumption,
-    state
-  };
+  // Drain der Maps-Callback-Queue, falls Google schneller war
+  window.addEventListener('DOMContentLoaded', function () {
+    if (window._mapsReadyQ?.length && typeof window.initGoogleMaps === 'function') {
+      try { window.initGoogleMaps(); } catch(e) { console.error(e); }
+      window._mapsReadyQ = [];
+    }
+  });
+
 })();
+
