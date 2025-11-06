@@ -6,6 +6,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/.nojekyll");
   eleventyConfig.addPassthroughCopy({ "src/pv-zuhause/_sections": "pv-zuhause/_sections" });
   eleventyConfig.addPassthroughCopy({ "src/pv-gewerbe/_sections": "pv-gewerbe/_sections" });
+  eleventyConfig.addPassthroughCopy({ "src/favicons": "/" });
   
   return {
     dir: { input: "src", output: "docs", includes: "_includes", layouts: "_layouts" },
