@@ -1,0 +1,38 @@
+:root{
+  --container-max:1200px;
+  --container-pad:clamp(16px,4vw,32px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;line-height:1.6;-webkit-text-size-adjust:100%}
+
+/* Container-Logik für alle Sections (kollidiert nicht mit deinem Header) */
+.container,
+.section .container{width:min(100% - 2*var(--container-pad), var(--container-max)); margin-inline:auto}
+
+/* Fluid Type */
+h1{font-size:clamp(2rem,1.2rem + 2.5vw,3rem);line-height:1.2}
+h2{font-size:clamp(1.5rem,1rem + 1.6vw,2.25rem)}
+h3{font-size:clamp(1.25rem,0.9rem + 1.2vw,1.6rem)}
+p,li{font-size:clamp(1rem,0.95rem + 0.2vw,1.05rem)}
+
+/* Media passt sich an */
+img,svg,video,canvas{max-width:100%;height:auto;display:block}
+
+/* Auto-Grid Utility – nützlich für Kartenraster */
+.grid-auto{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(12px,2vw,24px)}
+
+@media (max-width:1024px){
+  .tablet-stack{display:grid;grid-template-columns:1fr !important;gap:clamp(16px,4vw,28px)}
+  .desktop-only{display:none !important}
+}
+@media (max-width:768px){
+  :root{--container-max:680px}
+  .mobile-pad{padding-inline:var(--container-pad)}
+  .hide-on-mobile{display:none !important}
+  button,.btn{min-height:44px;padding:12px 16px}
+}
+@media (hover:none) and (pointer:coarse){ .tap-target{min-height:48px} }
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important}
+}

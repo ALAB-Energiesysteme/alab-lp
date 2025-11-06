@@ -10,6 +10,8 @@
   <!-- globale Assets -->
   <link rel="preload" href="/assets/fonts/montserrat-v31-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/fonts.css">
+ 
+
 
   <!-- seiten-spezifische CSS -->
   {% for href in page.css_files %}<link rel="stylesheet" href="{{ href }}">{% endfor %}
@@ -30,7 +32,7 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJZV7GTH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </head>
 <body class="{{ bodyClass | default('') }}" data-location="{{ dataLocation | default('pv-zuhause') }}">
-  {% block content %}{% endblock %}
+  {{ content | safe }}
 
   <!-- seiten-spezifische JS -->
   {% for src in page.js_files %}<script src="{{ src }}" defer></script>{% endfor %}

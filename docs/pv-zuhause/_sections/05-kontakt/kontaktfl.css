@@ -1,0 +1,214 @@
+/* ==== SCOPED: nur innerhalb .alab-kf ==== */
+:root{
+  --alab-gold:#E6C23C; --alab-grad-top:#E5C44D; --alab-grad-bot:#F3D663;
+  --txt:#1a1a1a; --txt2:#475569; --muted:#64748b; --bg:#f6f7f8; --white:#fff;
+  --b:#e5e7eb; --shadow-sm:0 2px 8px rgba(0,0,0,.06); --shadow-md:0 8px 24px rgba(0,0,0,.12);
+}
+.alab-kf{font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--txt);background:#fff}
+.alab-kf *{box-sizing:border-box}
+.alab-kf__wrap{max-width:960px;margin:0 auto;padding:24px 16px}
+.alab-kf__title{font-size:clamp(1.6rem,2.2vw,2rem);font-weight:700;margin:0 0 20px}
+.alab-kf__progress{margin:0 0 28px}
+.alab-kf__progress-head{display:flex;align-items:center;gap:10px;margin:0 0 8px}
+.alab-kf__progress-text{font-size:.9rem;font-weight:600;color:#334155}
+.alab-kf__check{width:22px;height:22px;color:#22c55e}
+.alab-kf__bar{width:100%;height:10px;background:#e2e8f0;border-radius:999px;overflow:hidden}
+.alab-kf__bar-fill{height:100%;background:linear-gradient(90deg,var(--alab-grad-top),var(--alab-grad-bot))}
+.alab-kf__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.alab-kf__grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.alab-kf__grid{grid-template-columns:1fr}}
+
+.alab-kf__card{background:var(--white);border:1px solid var(--b);border-radius:14px;box-shadow:var(--shadow-sm);
+  padding:22px;display:flex;flex-direction:column;align-items:center;gap:12px;cursor:pointer;transition:.2s}
+.alab-kf__card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:#d6d9df}
+.alab-kf__card.is-selected{background:linear-gradient(135deg,var(--alab-grad-top),var(--alab-grad-bot));
+  border-color:var(--alab-gold);box-shadow:0 6px 18px rgba(230,194,60,.35)}
+.alab-kf__card svg{width:64px;height:64px;color:#6b7280}
+.alab-kf__card.is-selected svg{color:#2b2b2b}
+.alab-kf__card-title{font-weight:700;text-align:center}
+
+.alab-kf__form{background:var(--white);border:1px solid var(--b);border-radius:16px;padding:22px;box-shadow:var(--shadow-sm)}
+.alab-kf__form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.alab-kf__form-row{grid-template-columns:1fr}}
+.alab-kf__field{display:flex;flex-direction:column;gap:6px;margin:0 0 14px}
+.alab-kf__label{font-size:.9rem;font-weight:600}
+.alab-kf__input{height:44px;padding:10px 12px;border:1.5px solid var(--b);border-radius:10px;font:inherit}
+.alab-kf__input:focus{outline:none;border-color:var(--alab-gold);box-shadow:0 0 0 4px rgba(230,194,60,.18)}
+.alab-kf__hint{font-size:.85rem;color:var(--muted)}
+.alab-kf__error{font-size:.85rem;color:#d32f2f;margin-top:4px;display:none}
+.alab-kf__error.is-visible{display:block}
+
+.alab-kf__checkbox{display:flex;align-items:flex-start;gap:10px;margin-top:2px}
+.alab-kf__checkbox input{width:18px;height:18px;margin-top:2px;accent-color:var(--alab-gold)}
+.alab-kf__checkbox a{color:var(--alab-gold);text-decoration:underline}
+
+.alab-kf__nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.alab-kf__btn{display:inline-flex;align-items:center;gap:8px;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer;transition:.2s}
+.alab-kf__btn--ghost{background:#fff;border:1.5px solid var(--b);color:#334155}
+.alab-kf__btn--ghost:hover{background:#f8fafc}
+.alab-kf__btn--primary{background:linear-gradient(135deg,var(--alab-grad-top),var(--alab-grad-bot));border:none;color:#2b2b2b;box-shadow:var(--shadow-sm)}
+.alab-kf__btn--primary:disabled{opacity:.5;cursor:not-allowed}
+.alab-kf__btn--primary:hover{filter:brightness(1.05)}
+
+.alab-kf__thanks{text-align:center;background:#fff;border:1px solid var(--b);border-radius:16px;padding:28px;box-shadow:var(--shadow-sm)}
+.alab-kf__thanks-icon{width:56px;height:56px;margin:0 auto 12px}
+.alab-kf__summary{margin-top:18px;text-align:left;background:#f9fafb;border:1px solid var(--b);border-radius:12px;padding:14px}
+.alab-kf__summary h4{margin:0 0 10px}
+.alab-kf__summary ul{margin:0;padding-left:18px}
+.alab-kf .is-hidden{display:none}
+
+/* ===== Tablet tuning (≤ 1024px) ===== */
+@media (max-width:1024px){
+  .alab-kf__wrap{max-width:740px;padding:20px 14px}
+  .alab-kf__grid{gap:12px}
+  .alab-kf__card{padding:18px;border-radius:12px}
+  .alab-kf__card svg{width:56px;height:56px}
+  .alab-kf__form{padding:18px;border-radius:12px}
+}
+
+/* ===== Mobile compact (≤ 600px) ===== */
+@media (max-width:600px){
+  .alab-kf__wrap{padding:16px 12px}
+  .alab-kf__title{font-size:1.25rem;margin-bottom:12px}
+  .alab-kf__progress{margin-bottom:14px}
+  .alab-kf__grid{grid-template-columns:1fr;gap:10px}
+  .alab-kf__card{
+    padding:14px 16px;
+    border-radius:12px;
+    min-height:84px;            /* größere Tap-Targets */
+    gap:10px;
+  }
+  .alab-kf__card svg{width:44px;height:44px}
+  .alab-kf__card-title{font-size:.95rem}
+  .alab-kf__form{padding:16px}
+  .alab-kf__form-row{grid-template-columns:1fr;gap:12px}
+  .alab-kf__field{margin-bottom:10px}
+  .alab-kf__input{height:42px;padding:10px 12px}
+  .alab-kf__btn{padding:12px 16px;border-radius:10px}
+}
+
+/* ===== Sticky Nav (optional) – Klasse an den Nav-Container hängen =====
+   <div class="alab-kf__nav alab-kf__nav--sticky"> … </div>
+*/
+.alab-kf__nav--sticky{
+  position: sticky; bottom: 0; z-index: 5;
+  padding-top: 8px;
+}
+.alab-kf__nav--sticky::before{
+  content:""; position:absolute; left:-16px; right:-16px; bottom:100%;
+  height:28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0), #fff 65%);
+  pointer-events:none;
+}
+@supports (padding: max(0px)) {
+  .alab-kf__nav--sticky{ padding-bottom: max(10px, env(safe-area-inset-bottom)); }
+}
+
+/* ===== Touch & A11y ===== */
+@media (hover:none){
+  .alab-kf__card:hover{transform:none; box-shadow:var(--shadow-sm)}
+}
+.alab-kf__card:focus-visible{
+  outline: 3px solid var(--alab-gold);
+  outline-offset: 3px;
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion:reduce){
+  .alab-kf__card,
+  .alab-kf__btn{transition:none}
+  html{scroll-behavior:auto}
+}
+
+
+/* ===== ULTRA-KOMPAKT (nur Mobil) ===== */
+@media (max-width: 480px){
+  .alab-kf__wrap{ padding:12px 10px; }
+
+  .alab-kf__title{ font-size:1.1rem; margin:0 0 8px; }
+  .alab-kf__progress{ margin-bottom:10px; }
+  .alab-kf__progress-text{ font-size:.8rem; }
+  .alab-kf__bar{ height:8px; }
+
+  /* Karten (Schrittwahl) kompakter */
+  .alab-kf__grid{ gap:8px; }
+  .alab-kf__card{
+    padding:12px 14px;
+    min-height:72px;
+    border-radius:10px;
+    gap:10px;
+  }
+  .alab-kf__card svg{ width:38px; height:38px; }
+  .alab-kf__card-title{ font-size:.95rem; }
+
+  /* Formular dicht */
+  .alab-kf__form{
+    padding:12px;
+    border-radius:12px;
+    box-shadow:none;          /* weniger „Luft“ */
+  }
+  .alab-kf__form-row{ grid-template-columns:1fr; gap:10px; }
+  .alab-kf__field{ gap:4px; margin:0 0 8px; }
+  .alab-kf__label{ font-size:.82rem; line-height:1.2; }
+  .alab-kf__input{
+    height:36px;
+    padding:8px 10px;
+    font-size:.95rem;
+    border-radius:8px;
+  }
+  .alab-kf__hint{ font-size:.78rem; margin-top:2px; }
+  .alab-kf__error{ font-size:.8rem; }
+
+  /* Checkbox-Block enger */
+  .alab-kf__checkbox{ gap:8px; }
+  .alab-kf__checkbox input{ width:16px; height:16px; margin-top:2px; }
+  .alab-kf__checkbox span{ font-size:.9rem; line-height:1.35; }
+
+  /* Navigation/Buttons kompakter */
+  .alab-kf__btn{ padding:10px 14px; font-size:.95rem; border-radius:10px; }
+}
+
+/* Extra eng bei sehr kleinen Geräten (≤360px) */
+@media (max-width: 360px){
+  .alab-kf__wrap{ padding:10px 8px; }
+  .alab-kf__label{ font-size:.78rem; }
+  .alab-kf__input{ height:34px; }
+  .alab-kf__btn{ padding:9px 12px; font-size:.9rem; }
+}
+
+
+/* ===== Overflow-Fix für die Kontakt-Section ===== */
+@media (max-width: 768px){
+  /* Hard clamp: Nichts darf breiter als der Viewport sein */
+  .alab-kf,
+  .alab-kf__wrap,
+  .alab-kf__grid,
+  .alab-kf__form,
+  .alab-kf__nav{
+    max-width: 100vw;
+    width: 100%;
+    margin-inline: 0;
+    overflow-x: hidden;
+  }
+
+  /* Grid-Kinder dürfen schrumpfen (sonst entstehen 1-2px Overflows) */
+  .alab-kf__grid > * { min-width: 0; }
+
+  /* Buttonbar (falls sticky) bündig, ohne „+Padding“-Breite */
+  .alab-kf__nav--sticky{
+    position: sticky;
+    left: 0; right: 0;
+    inset-inline: 0;
+    width: 100%;
+  }
+}
+
+/* Zusätzlicher globaler Schutz gegen Subpixel-Overflows auf iOS/Safari */
+@supports (-webkit-touch-callout: none) {
+  .alab-kf__wrap { padding-inline: 10px; }
+}
+
+/* Falls ein anderes Section-Element doch noch „übersteht“, clippen */
+@media (max-width: 768px){
+  section, .container { max-width: 100vw; overflow-x: clip; }
+}

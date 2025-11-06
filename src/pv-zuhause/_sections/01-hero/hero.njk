@@ -1,13 +1,18 @@
-{% set logo_url = logo_url | default('https://static.wixstatic.com/media/cac2b9_140d9302ade74ebd9280c07fd8d68234~mv2.png') %}
-{% set promo_href = promo_href | default('#foerder-check') %}
+{% set logo_url = logo_url | default('/assets/img/01-hero/LOGO_LP.avif') %}
+{% set promo_href = promo_href | default('https://www.alabenergiesysteme.de/angebot-einholen/') %}
 {% set promo_text = promo_text | default('Fördermittel 2025 nicht verpassen. Jetzt Anspruch prüfen & Angebot erhalten.') %}
-{% set bg_url    = bg_url    | default('https://static.wixstatic.com/media/cac2b9_41e18abad9294a29a4cac868cc4fe786~mv2.jpeg') %}
-{% set illu_url  = illu_url  | default('https://static.wixstatic.com/media/cac2b9_846531d74dee4b3882cf7b969503a1df~mv2.png') %}
+{% set bg_url    = bg_url    | default('/assets/img/01-hero/anlage2_LP.avif') %}
+{% set illu_url  = illu_url  | default('/assets/img/01-hero/anlage1_LP.avif') %}
 
 <header class="header">
   <div class="header-container">
     <img src="{{ logo_url }}" alt="ALAB Logo" class="logo">
-    <div class="header-right"><a href="{{ promo_href }}" class="promo-banner">{{ promo_text }}</a></div>
+    <div class="header-right">
+  <a href="{{ promo_href }}" class="promo-banner" target="_blank" rel="noopener">
+    {{ promo_text }}
+  </a>
+</div>
+
   </div>
 </header>
 
@@ -18,14 +23,9 @@
     <span class="hero-badge">Gemeinsam für Ihren Strompreis selbst</span>
     <h1 class="hero-title">Photovoltaik-Anlagen für<br>Ihr Eigenheim</h1>
     <p class="hero-subtitle">Bestimmen Sie Ihren Strompreis selbst – mit einer eigenen Solarfunkraftwerk von ALAB Energiesysteme.</p>
-    <a href="#calculator" class="cta-button">Zum Solarplanrechner</a>
+    <a href="#alab-planer" class="cta-button">Zum Solarplanrechner</a>
   </div>
+
   <div class="hero-illustration"><img src="{{ illu_url }}" alt="Solar Haus Illustration"></div>
 </section>
 
-<section id="foerder-check" style="height:500px;background:#f4f4f4;padding:50px;display:flex;align-items:center;justify-content:center;">
-  <h2 style="text-align:center;font-family:-apple-system,sans-serif;">Hier könnte Ihr Förder-Check-Rechner platziert werden.</h2>
-</section>
-<section id="calculator" style="height:500px;background:#fff;padding:50px;display:flex;align-items:center;justify-content:center;">
-  <h2 style="text-align:center;font-family:-apple-system,sans-serif;">Hier könnte der Solarplanrechner platziert werden.</h2>
-</section>

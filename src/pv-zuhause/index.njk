@@ -1,20 +1,31 @@
 ---
-layout: _layouts/base.njk
+layout: base.njk
 permalink: "pv-zuhause/index.html"
 title: "ALAB Solar – Photovoltaik für Ihr Eigenheim"
 description: "Eigene Solaranlage fürs Eigenheim: Planung & Montage vom Ingenieurbüro ALAB Energiesysteme. Jetzt Förder-Check & Solarplanrechner."
 canonical: "https://lp.alabenergiesysteme.de/pv-zuhause/"
 bodyClass: "private-page"
+
+
 page:
   css_files:
     - "/pv-zuhause/_sections/01-hero/hero.css"
+    - "/pv-zuhause/_sections/02-ablauf/section.css"
+    - "/pv-zuhause/_sections/03-planer/section.css"
+    - "/pv-zuhause/_sections/04-nach-auftrag/section.css"
+    - "/pv-zuhause/_sections/05-kontakt/kontaktfl.css"
+    - "/pv-zuhause/_sections/06-referenzen/referenzgalerie.css"
   js_files:
     - "/pv-zuhause/_sections/01-hero/hero.js"
+    - "/pv-zuhause/_sections/03-planer/section.js"
+    - "/pv-zuhause/_sections/05-kontakt/kontaktfl.js"
+    - "/pv-zuhause/_sections/06-referenzen/referenzgalerie.js"
 ---
+{% include "./_sections/01-hero/hero.njk" %}
+{% include "./_sections/05-kontakt/section.njk" %}
+{% include "./_sections/06-referenzen/section.njk" %}
+{% include "./_sections/02-ablauf/section.njk" %}
+{% include "./_sections/03-planer/section.njk" %}
+{% include "./_sections/04-nach-auftrag/section.njk" %}
 
-{% block content %}
-  
-  {% include "./_sections/01-hero/hero.njk" %}
 
-
-{% endblock %}

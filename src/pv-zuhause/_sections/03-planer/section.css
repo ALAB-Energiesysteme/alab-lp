@@ -1,0 +1,813 @@
+/* ============================================
+   ALAB Energiesysteme Contact Form Styles
+   Senior Frontend Engineering Standards
+   ============================================ */
+
+/* CSS Variables */
+:root {
+    --alab-gold: #E6C23C;
+    --alab-grad-top: #E5C44D;
+    --alab-grad-bot: #F3D663;
+    --alab-text-dark: #1a1a1a;
+    --alab-text-medium: #4a4a4a;
+    --alab-text-light: #6a6a6a;
+    --alab-border: #e0e0e0;
+    --alab-error: #d32f2f;
+    --alab-success: #4CAF50;
+    --alab-white: #ffffff;
+    --alab-bg-light: #f9f9f9;
+    --alab-shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+    --alab-shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --alab-shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --alab-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Base Styles (Scoped to .alab-contact) */
+.alab-contact * {
+    box-sizing: border-box;
+}
+
+.alab-contact {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--alab-text-dark);
+    line-height: 1.6;
+}
+
+/* Container */
+.alab-contact__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    position: relative;
+}
+
+/* Step Container */
+.alab-contact__step {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.alab-contact__step--active {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Step 2+ (Full Width) */
+#step2.alab-contact__step--active,
+#step3.alab-contact__step--active,
+#step4.alab-contact__step--active,
+#successMessage.alab-contact__step--active {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+}
+
+/* Form Section */
+.alab-contact__form-section {
+    max-width: 600px;
+}
+
+.alab-contact__form-section--full {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.alab-contact__header {
+    margin-bottom: 40px;
+}
+
+.alab-contact__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--alab-text-dark);
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+}
+
+.alab-contact__subtitle {
+    font-size: 1.125rem;
+    color: var(--alab-text-medium);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Address Search Group */
+.alab-contact__address-group {
+    margin-bottom: 32px;
+}
+
+.alab-contact__form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.alab-contact__form-group {
+    margin-bottom: 24px;
+}
+
+/* Labels */
+.alab-contact__label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--alab-text-dark);
+    margin-bottom: 8px;
+}
+
+.alab-contact__required {
+    color: var(--alab-error);
+    margin-left: 2px;
+}
+
+/* Input Wrapper */
+.alab-contact__input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.alab-contact__input-icon {
+    position: absolute;
+    left: 14px;
+    fill: var(--alab-text-light);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Input Fields */
+.alab-contact__input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--alab-text-dark);
+    background-color: var(--alab-white);
+    border: 2px solid var(--alab-border);
+    border-radius: 8px;
+    transition: var(--alab-transition);
+    outline: none;
+}
+
+.alab-contact__input--with-icon {
+    padding-left: 46px;
+}
+
+.alab-contact__input:focus {
+    border-color: var(--alab-gold);
+    box-shadow: 0 0 0 3px rgba(230, 194, 60, 0.1);
+}
+
+.alab-contact__input:hover:not(:focus) {
+    border-color: #c0c0c0;
+}
+
+.alab-contact__input[aria-invalid="true"] {
+    border-color: var(--alab-error);
+    background-color: #fff5f5;
+}
+
+.alab-contact__input[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+}
+
+/* Textarea */
+.alab-contact__textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--alab-text-dark);
+    background-color: var(--alab-white);
+    border: 2px solid var(--alab-border);
+    border-radius: 8px;
+    transition: var(--alab-transition);
+    outline: none;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.alab-contact__textarea:focus {
+    border-color: var(--alab-gold);
+    box-shadow: 0 0 0 3px rgba(230, 194, 60, 0.1);
+}
+
+.alab-contact__textarea:hover:not(:focus) {
+    border-color: #c0c0c0;
+}
+
+/* Checkbox */
+.alab-contact__checkbox-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.alab-contact__checkbox {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: var(--alab-gold);
+    flex-shrink: 0;
+}
+
+.alab-contact__checkbox-label {
+    font-size: 0.875rem;
+    color: var(--alab-text-medium);
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.alab-contact__link {
+    color: var(--alab-gold);
+    text-decoration: underline;
+    transition: var(--alab-transition);
+}
+
+.alab-contact__link:hover {
+    color: var(--alab-grad-top);
+}
+
+.alab-contact__link:focus {
+    outline: 2px solid var(--alab-gold);
+    outline-offset: 2px;
+}
+
+/* Error Messages */
+.alab-contact__error {
+    font-size: 0.875rem;
+    color: var(--alab-error);
+    margin-top: 6px;
+    min-height: 20px;
+    display: none;
+}
+
+.alab-contact__error:not(:empty) {
+    display: block;
+}
+
+/* Hint Text */
+.alab-contact__hint {
+    font-size: 0.875rem;
+    color: var(--alab-text-light);
+    margin-top: 6px;
+}
+
+/* Submit Button */
+.alab-contact__submit {
+    width: 100%;
+    padding: 16px 32px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--alab-white);
+    background: linear-gradient(135deg, var(--alab-grad-top) 0%, var(--alab-grad-bot) 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--alab-transition);
+    box-shadow: var(--alab-shadow-md);
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alab-contact__submit:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--alab-shadow-lg);
+}
+
+.alab-contact__submit:active {
+    transform: translateY(0);
+    box-shadow: var(--alab-shadow-sm);
+}
+
+.alab-contact__submit:focus {
+    outline: 2px solid var(--alab-gold);
+    outline-offset: 3px;
+}
+
+.alab-contact__submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Step Header (Navigation) */
+.alab-contact__step-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--alab-border);
+}
+
+.alab-contact__back-btn {
+    background: var(--alab-white);
+    border: 2px solid var(--alab-border);
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: var(--alab-transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alab-contact__back-btn:hover {
+    background: var(--alab-bg-light);
+    border-color: var(--alab-gold);
+}
+
+.alab-contact__back-btn svg {
+    fill: var(--alab-text-medium);
+}
+
+.alab-contact__step-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.alab-contact__step-nav-item {
+    font-size: 0.875rem;
+    color: var(--alab-text-light);
+    font-weight: 500;
+}
+
+.alab-contact__step-nav-item--active {
+    color: var(--alab-gold);
+    font-weight: 700;
+}
+
+.alab-contact__step-nav-item--done {
+    color: var(--alab-text-medium);
+    font-weight: 600;
+}
+
+.alab-contact__step-nav-separator {
+    color: var(--alab-text-light);
+    font-size: 0.875rem;
+}
+
+/* Map Section (Step 2) */
+.alab-contact__map-section {
+    width: 100%;
+}
+
+.alab-contact__map-content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    align-items: start;
+}
+
+.alab-contact__map-main {
+    flex: 1;
+}
+
+.alab-contact__map-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--alab-text-dark);
+    margin: 0 0 10px 0;
+}
+
+.alab-contact__map-description {
+    font-size: 1rem;
+    color: var(--alab-text-medium);
+    margin-bottom: 20px;
+}
+
+.alab-contact__map-large {
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    border: 2px solid var(--alab-border);
+    overflow: hidden;
+    background: var(--alab-bg-light);
+}
+
+.alab-contact__map-hints {
+    margin-top: 20px;
+}
+
+.alab-contact__map-hints p {
+    font-size: 0.875rem;
+    color: var(--alab-text-light);
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.alab-contact__map-sidebar {
+    background: var(--alab-white);
+    border: 2px solid var(--alab-border);
+    border-radius: 12px;
+    padding: 24px;
+    position: sticky;
+    top: 20px;
+}
+
+.alab-contact__roof-info h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--alab-text-dark);
+    margin: 0 0 12px 0;
+}
+
+.alab-contact__instruction {
+    font-size: 0.875rem;
+    color: var(--alab-text-medium);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    padding: 12px;
+    background: var(--alab-bg-light);
+    border-radius: 6px;
+    border-left: 3px solid var(--alab-gold);
+}
+
+.alab-contact__roof-display {
+    margin-bottom: 20px;
+}
+
+.alab-contact__roof-label {
+    font-size: 0.875rem;
+    color: var(--alab-text-medium);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.alab-contact__roof-size {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--alab-gold);
+    display: block;
+}
+
+.alab-contact__divider {
+    height: 1px;
+    background: var(--alab-border);
+    margin: 20px 0;
+}
+
+.alab-contact__manual-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: var(--alab-text-medium);
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+.alab-contact__manual-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--alab-gold);
+}
+
+.alab-contact__manual-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--alab-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    margin-bottom: 20px;
+    transition: var(--alab-transition);
+}
+
+.alab-contact__manual-input:focus {
+    border-color: var(--alab-gold);
+    outline: none;
+}
+
+/* Image Section */
+.alab-contact__image-section {
+    position: sticky;
+    top: 20px;
+}
+
+.alab-contact__hero-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: var(--alab-shadow-lg);
+}
+
+/* Consumption Section (Step 3) */
+.alab-contact__consumption-section {
+    width: 100%;
+}
+
+.alab-contact__consumption-content {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.alab-contact__consumption-display {
+    position: sticky;
+    top: 20px;
+}
+
+.alab-contact__consumption-box {
+    background: linear-gradient(135deg, var(--alab-grad-top) 0%, var(--alab-grad-bot) 100%);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--alab-shadow-lg);
+}
+
+.alab-contact__consumption-box h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--alab-white);
+    margin: 0 0 10px 0;
+}
+
+.alab-contact__consumption-box p {
+    font-size: 1rem;
+    color: var(--alab-white);
+    margin: 0;
+    opacity: 0.9;
+}
+
+.alab-contact__consumption-form h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--alab-text-dark);
+    margin: 0 0 30px 0;
+}
+
+/* Success Banner */
+.alab-contact__success-banner {
+    background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.alab-contact__success-banner h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--alab-white);
+    margin: 0 0 10px 0;
+}
+
+.alab-contact__success-banner p {
+    font-size: 1.125rem;
+    color: var(--alab-white);
+    margin: 0;
+    opacity: 0.95;
+}
+
+/* Success Message */
+.alab-contact__success {
+    text-align: center;
+    padding: 80px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alab-contact__success-icon {
+    margin-bottom: 32px;
+}
+
+.alab-contact__success-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--alab-success);
+    margin: 0 0 20px 0;
+}
+
+.alab-contact__success-text {
+    font-size: 1.125rem;
+    color: var(--alab-text-medium);
+    margin: 0 0 32px 0;
+}
+
+.alab-contact__success .alab-contact__submit {
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* Autocomplete Dropdown Styling */
+.pac-container {
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 8px;
+    border: 2px solid var(--alab-border);
+    box-shadow: var(--alab-shadow-md);
+    margin-top: 4px;
+}
+
+.pac-item {
+    padding: 12px 14px;
+    cursor: pointer;
+    border-top: 1px solid var(--alab-border);
+}
+
+.pac-item:first-child {
+    border-top: none;
+}
+
+.pac-item:hover {
+    background-color: var(--alab-bg-light);
+}
+
+.pac-item-selected {
+    background-color: rgba(230, 194, 60, 0.1);
+}
+
+.pac-icon {
+    display: none;
+}
+
+.pac-item-query {
+    font-weight: 600;
+    color: var(--alab-text-dark);
+}
+
+/* Responsive Design */
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+    .alab-contact__container {
+        padding: 40px 20px;
+    }
+
+    .alab-contact__step--active {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .alab-contact__image-section {
+        order: -1;
+    }
+
+    .alab-contact__form-section {
+        max-width: 100%;
+    }
+
+    .alab-contact__title {
+        font-size: 2rem;
+    }
+
+    .alab-contact__map-content {
+        grid-template-columns: 1fr;
+    }
+
+    .alab-contact__map-sidebar {
+        position: static;
+    }
+
+    .alab-contact__consumption-content {
+        grid-template-columns: 1fr;
+    }
+
+    .alab-contact__consumption-display {
+        position: static;
+    }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+    .alab-contact__container {
+        padding: 30px 16px;
+        gap: 30px;
+    }
+
+    .alab-contact__title {
+        font-size: 1.75rem;
+    }
+
+    .alab-contact__subtitle {
+        font-size: 1rem;
+    }
+
+    .alab-contact__form-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 0;
+    }
+
+    .alab-contact__form-group {
+        margin-bottom: 20px;
+    }
+
+    .alab-contact__submit {
+        padding: 14px 28px;
+        font-size: 1rem;
+    }
+
+    .alab-contact__success {
+        padding: 40px 24px;
+    }
+
+    .alab-contact__success-title {
+        font-size: 1.5rem;
+    }
+
+    .alab-contact__success-text {
+        font-size: 1rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .alab-contact__map-container,
+    .alab-contact__submit {
+        display: none;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .alab-contact__input,
+    .alab-contact__textarea {
+        border-width: 3px;
+    }
+
+    .alab-contact__submit {
+        border: 3px solid var(--alab-text-dark);
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .alab-contact *,
+    .alab-contact *::before,
+    .alab-contact *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus Visible (Modern Browsers) */
+.alab-contact__input:focus-visible,
+.alab-contact__textarea:focus-visible,
+.alab-contact__checkbox:focus-visible,
+.alab-contact__link:focus-visible,
+.alab-contact__submit:focus-visible {
+    outline: 2px solid var(--alab-gold);
+    outline-offset: 2px;
+}
+
+/* Loading State */
+.alab-contact__submit.is-loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+}
+
+.alab-contact__submit.is-loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 3px solid var(--alab-white);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+html { scroll-behavior: smooth; }
+
+/* Höhe deines fixen Headers als Abstand – bei dir meist ~80–100px */
+#alab-planer { scroll-margin-top: 92px; }

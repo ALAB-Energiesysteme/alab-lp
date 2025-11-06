@@ -1,0 +1,51 @@
+
+<section class="alab-kf" id="kontakt-wizard">
+  <div class="alab-kf__wrap">
+    <!-- Fortschritt -->
+    <div class="alab-kf__progress" aria-live="polite">
+      <div class="alab-kf__progress-head">
+        <span id="kf-progress-text" class="alab-kf__progress-text">10% geschafft</span>
+        <svg class="alab-kf__check" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="alab-kf__bar">
+        <div id="kf-progress-bar" class="alab-kf__bar-fill" style="width:10%"></div>
+      </div>
+    </div>
+
+    <div id="kf-stepper">
+      <h2 id="kf-title" class="alab-kf__title"></h2>
+
+      <!-- Options -->
+      <div id="kf-grid" class="alab-kf__grid" role="group" aria-labelledby="kf-title"></div>
+
+      <!-- Kontaktformular -->
+      <div id="kf-form" class="alab-kf__form is-hidden" aria-live="polite"></div>
+
+      <!-- Danke-Meldung -->
+      <div id="kf-thanks" class="alab-kf__thanks is-hidden" role="status" aria-live="polite">
+        <svg class="alab-kf__thanks-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#4CAF50"/>
+        </svg>
+        <h3>Vielen Dank!</h3>
+        <p>Ihre Anfrage wurde übermittelt. Wir melden uns innerhalb von 24 Stunden.</p>
+
+        <div class="alab-kf__summary">
+          <h4>Ihre Auswahl</h4>
+          <ul id="kf-summary"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="alab-kf__nav">
+      <button id="kf-prev" type="button" class="alab-kf__btn alab-kf__btn--ghost">
+        <span class="alab-kf__icon-left" aria-hidden="true">←</span> Zurück
+      </button>
+      <button id="kf-next" type="button" class="alab-kf__btn alab-kf__btn--primary" disabled>
+        Weiter
+      </button>
+    </div>
+  </div>
+</section>

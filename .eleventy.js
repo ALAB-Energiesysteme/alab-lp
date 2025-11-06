@@ -1,5 +1,4 @@
 module.exports = function(eleventyConfig) {
-  // Assets & statische Dateien durchreichen
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/sitemap.xml");
@@ -10,6 +9,7 @@ module.exports = function(eleventyConfig) {
 
   return {
     dir: { input: "src", output: "docs", includes: "_includes", layouts: "_layouts" },
-    templateFormats: ["njk","html","md"]
+    templateFormats: ["njk","html","md"],
+    htmlTemplateEngine: "njk"
   };
 };

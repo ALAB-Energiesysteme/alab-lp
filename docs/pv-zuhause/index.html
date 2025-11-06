@@ -7,73 +7,751 @@
   <meta name="description" content="Eigene Solaranlage fürs Eigenheim: Planung &amp; Montage vom Ingenieurbüro ALAB Energiesysteme. Jetzt Förder-Check &amp; Solarplanrechner.">
   <link rel="canonical" href="https://lp.alabenergiesysteme.de/pv-zuhause/">
 
+  <!-- globale Assets -->
   <link rel="preload" href="/assets/fonts/montserrat-v31-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/fonts.css">
-  <link rel="stylesheet" href="/pv-zuhause/_sections/01-hero/hero.css">
+ 
+
+
+  <!-- seiten-spezifische CSS -->
+  <link rel="stylesheet" href="/pv-zuhause/_sections/01-hero/hero.css"><link rel="stylesheet" href="/pv-zuhause/_sections/02-ablauf/section.css"><link rel="stylesheet" href="/pv-zuhause/_sections/03-planer/section.css"><link rel="stylesheet" href="/pv-zuhause/_sections/04-nach-auftrag/section.css"><link rel="stylesheet" href="/pv-zuhause/_sections/05-kontakt/kontaktfl.css"><link rel="stylesheet" href="/pv-zuhause/_sections/06-referenzen/referenzgalerie.css">
 
   <!-- Consent + GTM -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('consent','default',{ad_user_data:'denied',ad_personalization':'denied',ad_storage':'denied',analytics_storage':'denied'});
+    gtag('consent','default',{
+      ad_user_data:'denied', ad_personalization:'denied',
+      ad_storage:'denied', analytics_storage:'denied'
+    });
   </script>
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-    j.async=true;j.defer=true;j.src='https://www.googletagmanager.com/gtm.js?id=GTM-NJZV7GTH'+dl;
-    f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NJZV7GTH');</script>
+  var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;j.defer=true;j.src='https://www.googletagmanager.com/gtm.js?id=GTM-NJZV7GTH'+dl;f.parentNode.insertBefore(j,f);})
+  (window,document,'script','dataLayer','GTM-NJZV7GTH');</script>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJZV7GTH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </head>
-<body data-location="pv-zuhause">
-
-  
+<body class="private-page" data-location="pv-zuhause">
   
 
 
 
 
 
-
-
-<!-- Header -->
 <header class="header">
   <div class="header-container">
-    <img src="https://static.wixstatic.com/media/cac2b9_140d9302ade74ebd9280c07fd8d68234~mv2.png" alt="ALAB Logo" class="logo">
+    <img src="/assets/img/01-hero/LOGO_LP.avif" alt="ALAB Logo" class="logo">
     <div class="header-right">
-      <a href="#foerder-check" class="promo-banner">Fördermittel 2025 nicht verpassen. Jetzt Anspruch prüfen &amp; Angebot erhalten.</a>
-    </div>
+  <a href="https://www.alabenergiesysteme.de/angebot-einholen/" class="promo-banner" target="_blank" rel="noopener">
+    Fördermittel 2025 nicht verpassen. Jetzt Anspruch prüfen &amp; Angebot erhalten.
+  </a>
+</div>
+
   </div>
 </header>
 
-<!-- Hero -->
 <section class="hero" id="home">
-  <div class="hero-background">
-    <img src="https://static.wixstatic.com/media/cac2b9_41e18abad9294a29a4cac868cc4fe786~mv2.jpeg" alt="Haus mit Photovoltaik-Anlage">
-  </div>
+  <div class="hero-background"><img src="/assets/img/01-hero/anlage2_LP.avif" alt="Haus mit Photovoltaik-Anlage"></div>
   <div class="hero-overlay"></div>
-
   <div class="hero-content">
     <span class="hero-badge">Gemeinsam für Ihren Strompreis selbst</span>
     <h1 class="hero-title">Photovoltaik-Anlagen für<br>Ihr Eigenheim</h1>
-    <p class="hero-subtitle">
-      Bestimmen Sie Ihren Strompreis selbst – mit einer eigenen Solarfunkraftwerk von ALAB Energiesysteme.
+    <p class="hero-subtitle">Bestimmen Sie Ihren Strompreis selbst – mit einer eigenen Solarfunkraftwerk von ALAB Energiesysteme.</p>
+    <a href="#alab-planer" class="cta-button">Zum Solarplanrechner</a>
+  </div>
+
+  <div class="hero-illustration"><img src="/assets/img/01-hero/anlage1_LP.avif" alt="Solar Haus Illustration"></div>
+</section>
+
+
+
+<section class="alab-kf" id="kontakt-wizard">
+  <div class="alab-kf__wrap">
+    <!-- Fortschritt -->
+    <div class="alab-kf__progress" aria-live="polite">
+      <div class="alab-kf__progress-head">
+        <span id="kf-progress-text" class="alab-kf__progress-text">10% geschafft</span>
+        <svg class="alab-kf__check" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="alab-kf__bar">
+        <div id="kf-progress-bar" class="alab-kf__bar-fill" style="width:10%"></div>
+      </div>
+    </div>
+
+    <div id="kf-stepper">
+      <h2 id="kf-title" class="alab-kf__title"></h2>
+
+      <!-- Options -->
+      <div id="kf-grid" class="alab-kf__grid" role="group" aria-labelledby="kf-title"></div>
+
+      <!-- Kontaktformular -->
+      <div id="kf-form" class="alab-kf__form is-hidden" aria-live="polite"></div>
+
+      <!-- Danke-Meldung -->
+      <div id="kf-thanks" class="alab-kf__thanks is-hidden" role="status" aria-live="polite">
+        <svg class="alab-kf__thanks-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#4CAF50"/>
+        </svg>
+        <h3>Vielen Dank!</h3>
+        <p>Ihre Anfrage wurde übermittelt. Wir melden uns innerhalb von 24 Stunden.</p>
+
+        <div class="alab-kf__summary">
+          <h4>Ihre Auswahl</h4>
+          <ul id="kf-summary"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="alab-kf__nav">
+      <button id="kf-prev" type="button" class="alab-kf__btn alab-kf__btn--ghost">
+        <span class="alab-kf__icon-left" aria-hidden="true">←</span> Zurück
+      </button>
+      <button id="kf-next" type="button" class="alab-kf__btn alab-kf__btn--primary" disabled>
+        Weiter
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="ref-gallery" class="section reveal" aria-labelledby="ref-title">
+  <div class="container">
+    <h2 id="ref-title" class="section-title">Referenzen</h2>
+    <p class="section-subtitle center">
+      Ein kleiner Auszug betreuter Anlagen – sauber installiert, überwacht und dokumentiert.
     </p>
-    <a href="#calculator" class="cta-button">Zum Solarplanrechner</a>
+
+    <div class="rg" role="region" aria-roledescription="carousel" aria-label="Referenzgalerie">
+      <button class="rg__nav rg__nav--prev" type="button" aria-label="Zurück">
+        <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M15 6l-6 6l6 6" />
+        </svg>
+      </button>
+
+      <div class="rg__viewport" tabindex="0">
+        <ul class="rg__track">
+          <!-- Slides -->
+          <li class="rg__slide">
+            <a class="rg__figure" href="/assets/img/06-referenzen/anlage1_G.avif">
+              <div class="rg__media">
+                <img src="/assets/img/06-referenzen/anlage1_G.avif"
+                     alt="Gewerbliche Photovoltaik-Referenz 1" decoding="async" loading="lazy" draggable="false"
+                     onerror="this.src='https://placehold.co/600x400/f3f6fa/334155?text=Bild+1+fehlt';">
+              </div>
+            </a>
+          </li>
+
+          <li class="rg__slide">
+            <a class="rg__figure" href="/assets/img/06-referenzen/anlage12_P.avif">
+              <div class="rg__media">
+                <img src="/assets/img/06-referenzen/anlage12_P.avif"
+                     alt="Gewerbliche Photovoltaik-Referenz 2" decoding="async" loading="lazy" draggable="false"
+                     onerror="this.src='https://placehold.co/600x400/f3f6fa/334155?text=Bild+2+fehlt';">
+              </div>
+            </a>
+          </li>
+
+          <li class="rg__slide">
+            <a class="rg__figure" href="/assets/img/06-referenzen/anlage7_P.avif">
+              <div class="rg__media">
+                <img src="/assets/img/06-referenzen/anlage7_P.avif"
+                     alt="Gewerbliche Photovoltaik-Referenz 3" decoding="async" loading="lazy" draggable="false"
+                     onerror="this.src='https://placehold.co/600x400/f3f6fa/334155?text=Bild+3+fehlt';">
+              </div>
+            </a>
+          </li>
+
+          <li class="rg__slide">
+            <a class="rg__figure" href="/assets/img/06-referenzen/anlage5_P.avif">
+              <div class="rg__media">
+                <img src="/assets/img/06-referenzen/anlage5_P.avif"
+                     alt="Gewerbliche Photovoltaik-Referenz 4" decoding="async" loading="lazy" draggable="false"
+                     onerror="this.src='https://placehold.co/600x400/f3f6fa/334155?text=Bild+4+fehlt';">
+              </div>
+            </a>
+          </li>
+
+          <li class="rg__slide">
+            <a class="rg__figure" href="/assets/img/06-referenzen/anlage11_P.avif">
+              <div class="rg__media">
+                <img src="/assets/img/06-referenzen/anlage11_P.avif"
+                     alt="Gewerbliche Photovoltaik-Referenz 5" decoding="async" loading="lazy" draggable="false"
+                     onerror="this.src='https://placehold.co/600x400/f3f6fa/334155?text=Bild+5+fehlt';">
+              </div>
+            </a>
+          </li>
+
+          <li class="rg__slide">
+            <a class="rg__figure" href="/assets/img/06-referenzen/anlage8_P.avif">
+              <div class="rg__media">
+                <img src="/assets/img/06-referenzen/anlage8_P.avif"
+                     alt="Gewerbliche Photovoltaik-Referenz 6" decoding="async" loading="lazy" draggable="false"
+                     onerror="this.src='https://placehold.co/600x400/f3f6fa/334155?text=Bild+6+fehlt';">
+              </div>
+            </a>
+          </li>
+
+          <li class="rg__slide">
+            <a class="rg__figure" href="/assets/img/06-referenzen/anlage9_P.avif">
+              <div class="rg__media">
+                <img src="/assets/img/06-referenzen/anlage9_P.avif"
+                     alt="Gewerbliche Photovoltaik-Referenz 7" decoding="async" loading="lazy" draggable="false"
+                     onerror="this.src='https://placehold.co/600x400/f3f6fa/334155?text=Bild+7+fehlt';">
+              </div>
+            </a>
+          </li>
+
+          <li class="rg__slide">
+            <a class="rg__figure" href="/assets/img/06-referenzen/anlage3_P.avif">
+              <div class="rg__media">
+                <img src="/assets/img/06-referenzen/anlage3_P.avif"
+                     alt="Gewerbliche Photovoltaik-Referenz 8" decoding="async" loading="lazy" draggable="false"
+                     onerror="this.src='https://placehold.co/600x400/f3f6fa/334155?text=Bild+8+fehlt';">
+              </div>
+            </a>
+          </li>
+
+          <li class="rg__slide">
+            <a class="rg__figure" href="https://static.wixstatic.com/media/cac2b9_aeb28b9d212f43f18ef82f31e3131b9a~mv2.jpeg">
+              <div class="rg__media">
+                <img src="https://static.wixstatic.com/media/cac2b9_aeb28b9d212f43f18ef82f31e3131b9a~mv2.jpeg"
+                     alt="Gewerbliche Photovoltaik-Referenz 9" decoding="async" loading="lazy" draggable="false"
+                     onerror="this.src='https://placehold.co/600x400/f3f6fa/334155?text=Bild+9+fehlt';">
+              </div>
+            </a>
+          </li>
+
+          <li class="rg__slide">
+            <a class="rg__figure" href="https://static.wixstatic.com/media/cac2b9_806be130d2534c8c8c40828981c26099~mv2.png">
+              <div class="rg__media">
+                <img src="https://static.wixstatic.com/media/cac2b9_806be130d2534c8c8c40828981c26099~mv2.png"
+                     alt="Gewerbliche Photovoltaik-Referenz 10" decoding="async" loading="lazy" draggable="false"
+                     onerror="this.src='https://placehold.co/600x400/f3f6fa/334155?text=Bild+10+fehlt';">
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <button class="rg__nav rg__nav--next" type="button" aria-label="Weiter">
+        <svg width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M9 6l6 6l-6 6" />
+        </svg>
+      </button>
+
+      <div class="rg__dots" aria-label="Slides"></div>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="ablauf" class="timeline-wrapper" aria-label="Ablauf in fünf Schritten">
+  <div class="pv-ablauf">
+    <div class="header-section">
+      <h2>In 5&nbsp;Schritten zur eigenen PV-Anlage</h2>
+    </div>
+    <div class="timeline-section">
+      <div class="timeline-grid">
+        <!-- Schritt 1 -->
+        <article class="timeline-step step-1" aria-labelledby="step1-title">
+          <div class="step-icon" aria-hidden="true">1</div>
+          <div class="step-number">Schritt 1</div>
+          <h3 id="step1-title" class="step-title">Kontaktformular ausfüllen</h3>
+          <p class="step-description">Bitte das untenstehende Kontaktformular ausfüllen!</p>
+        </article>
+
+        <!-- Schritt 2 -->
+        <article class="timeline-step step-2" aria-labelledby="step2-title">
+          <div class="step-icon" aria-hidden="true">2</div>
+          <div class="step-number">Schritt 2</div>
+          <h3 id="step2-title" class="step-title">Erfassungsbogen erhalten</h3>
+          <p class="step-description">Wir senden Dir einen Erfassungsbogen für das Telefongespräch zu!</p>
+        </article>
+
+        <!-- Schritt 3 -->
+        <article class="timeline-step step-3" aria-labelledby="step3-title">
+          <div class="step-icon" aria-hidden="true">3</div>
+          <div class="step-number">Schritt 3</div>
+          <h3 id="step3-title" class="step-title">Beratung erhalten</h3>
+          <p class="step-description">Wir rufen Dich zurück und führen ein erstes Telefongespräch!</p>
+        </article>
+
+        <!-- Schritt 4 -->
+        <article class="timeline-step step-4" aria-labelledby="step4-title">
+          <div class="step-icon" aria-hidden="true">4</div>
+          <div class="step-number">Schritt 4</div>
+          <h3 id="step4-title" class="step-title">Persönlicher Termin</h3>
+          <p class="step-description">Online, im Showroom oder bei Dir zuhause – wir beraten Dich!</p>
+        </article>
+
+        <!-- Schritt 5 -->
+        <article class="timeline-step step-5" aria-labelledby="step5-title">
+          <div class="step-icon" aria-hidden="true">5</div>
+          <div class="step-number">Schritt 5</div>
+          <h3 id="step5-title" class="step-title">Angebot &amp; Planung</h3>
+          <p class="step-description">Wir erstellen eine Planung und ein detailliertes Angebot!</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="alab-planer" class="alab-planer alab-contact">
+  <div class="alab-contact__container">
+
+    
+    <div id="step1" class="alab-contact__step alab-contact__step--active">
+      <div class="alab-contact__form-section">
+        <div class="alab-contact__header">
+          <h1 class="alab-contact__title">Jetzt PV-Anlage berechnen</h1>
+          <p class="alab-contact__subtitle">Adresse eingeben und in 2 Minuten die passende Photovoltaik-Anlage für Ihr Dach berechnen</p>
+        </div>
+
+        <div class="alab-contact__address-group">
+          <label for="addressSearch" class="alab-contact__label">
+            <span class="alab-contact__label-text">Ihre Adresse</span>
+            <span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
+          </label>
+          <div class="alab-contact__input-wrapper">
+            <svg class="alab-contact__input-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            <input
+              type="text"
+              id="addressSearch"
+              class="alab-contact__input alab-contact__input--with-icon"
+              placeholder="Straße und Hausnummer eingeben..."
+              autocomplete="off"
+              required
+              aria-required="true"
+              aria-describedby="addressSearch-error"
+            >
+          </div>
+          <div id="addressSearch-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="alab-contact__image-section">
+        <img
+          src="/assets/img/03-planer/plan.avif"
+          alt="Haus mit moderner Photovoltaikanlage auf dem Dach"
+          class="alab-contact__hero-image"
+          loading="lazy"
+          width="800"
+          height="533"
+        >
+      </div>
+    </div>
+
+    
+    <div id="step2" class="alab-contact__step">
+      <div class="alab-contact__map-section">
+        <div class="alab-contact__step-header">
+          <button class="alab-contact__back-btn" onclick="window.ALAB_CONTACT_APP.goToStep(1)" aria-label="Zurück">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          </button>
+          <div class="alab-contact__step-nav">
+            <span class="alab-contact__step-nav-item alab-contact__step-nav-item--active">Dachfläche</span>
+            <span class="alab-contact__step-nav-separator">→</span>
+            <span class="alab-contact__step-nav-item">Stromverbrauch</span>
+            <span class="alab-contact__step-nav-separator">→</span>
+            <span class="alab-contact__step-nav-item">Anfrage</span>
+          </div>
+        </div>
+
+        <div class="alab-contact__map-content">
+          <div class="alab-contact__map-main">
+            <h2 class="alab-contact__map-title">Markieren Sie Ihr Dach auf der Karte</h2>
+            <p class="alab-contact__map-description">
+              <strong>So geht's:</strong> Klicken Sie oben in der Karte auf das <strong>Polygon-Symbol</strong>
+              <svg viewBox="0 0 24 24" width="16" height="16" style="display:inline-block;vertical-align:middle;fill:#E6C23C;">
+                <path d="M2 20h20v2H2v-2zm2-8l4-4v12H4V12zm6 0l4-4v12h-4V12zm6-8l4 4v12h-4V4z"/>
+              </svg>
+              und zeichnen Sie Ihr Dach ein. Schließen Sie die Form durch Klick auf den Startpunkt.
+            </p>
+
+            <div id="mainMap" class="alab-contact__map-large"></div>
+
+            <div class="alab-contact__map-hints">
+              <p>Störflächen (Kamine, Dachfenster) können nach der Grundfläche ebenfalls markiert werden.</p>
+              <p>Mehrere Dachflächen? Einfach nacheinander zeichnen.</p>
+            </div>
+          </div>
+
+          <div class="alab-contact__map-sidebar">
+            <div class="alab-contact__roof-info">
+              <h3>Dachfläche markieren</h3>
+              <p class="alab-contact__instruction">Nutzen Sie das Polygon-Werkzeug oben in der Karte, um Ihr Dach einzuzeichnen.</p>
+
+              <div class="alab-contact__roof-display">
+                <span class="alab-contact__roof-label">Markierte Fläche:</span>
+                <div class="alab-contact__roof-size" id="roofSizeDisplay">0 m²</div>
+              </div>
+
+              <div class="alab-contact__divider"></div>
+
+              <label class="alab-contact__manual-label">
+                <input type="checkbox" id="manualInput" onchange="window.ALAB_CONTACT_APP.toggleManualInput()">
+                <span>Oder Dachgröße manuell eingeben</span>
+              </label>
+              <input type="number" id="manualRoofSize" class="alab-contact__manual-input" style="display:none;" min="10" max="500" placeholder="z.B. 120">
+            </div>
+
+            <button class="alab-contact__submit" onclick="window.ALAB_CONTACT_APP.goToStep(3)">
+              Weiter zum Stromverbrauch
+              <svg viewBox="0 0 24 24" width="20" height="20" style="margin-left:8px;"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="step3" class="alab-contact__step">
+      <div class="alab-contact__consumption-section">
+        <div class="alab-contact__step-header">
+          <button class="alab-contact__back-btn" onclick="window.ALAB_CONTACT_APP.goToStep(2)" aria-label="Zurück">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          </button>
+          <div class="alab-contact__step-nav">
+            <span class="alab-contact__step-nav-item alab-contact__step-nav-item--done">Dachfläche</span>
+            <span class="alab-contact__step-nav-separator">→</span>
+            <span class="alab-contact__step-nav-item alab-contact__step-nav-item--active">Stromverbrauch</span>
+            <span class="alab-contact__step-nav-separator">→</span>
+            <span class="alab-contact__step-nav-item">Anfrage</span>
+          </div>
+        </div>
+
+        <div class="alab-contact__consumption-content">
+          <div class="alab-contact__consumption-display">
+            <div class="alab-contact__consumption-box">
+              <h2 id="consumptionValue">3.440 kWh</h2>
+              <p>Jährlicher Stromverbrauch</p>
+            </div>
+          </div>
+
+          <div class="alab-contact__consumption-form">
+            <h3>Bedarfsanalyse: Wie hoch ist Ihr jährlicher Stromverbrauch?</h3>
+
+            <div class="alab-contact__form-row">
+              <div class="alab-contact__form-group">
+                <label class="alab-contact__label">Personenanzahl</label>
+                <select id="persons" class="alab-contact__input" onchange="window.ALAB_CONTACT_APP.calculateConsumption()">
+                  <option value="1">1 Person</option>
+                  <option value="2">2 Personen</option>
+                  <option value="3">3 Personen</option>
+                  <option value="4" selected>4 Personen</option>
+                  <option value="5">5+ Personen</option>
+                </select>
+              </div>
+
+              <div class="alab-contact__form-group">
+                <label class="alab-contact__label">Wohnfläche (m²)</label>
+                <input type="number" id="livingArea" class="alab-contact__input" value="160" min="50" max="500" onchange="window.ALAB_CONTACT_APP.calculateConsumption()">
+              </div>
+            </div>
+
+            <div class="alab-contact__form-group">
+              <label class="alab-contact__label">Vorhandene oder geplante Stromverbraucher</label>
+              <label class="alab-contact__checkbox-wrapper">
+                <input type="checkbox" id="warmwater" class="alab-contact__checkbox" onchange="window.ALAB_CONTACT_APP.calculateConsumption()">
+                <span class="alab-contact__checkbox-label">Elektrische Warmwasserbereitung</span>
+              </label>
+              <label class="alab-contact__checkbox-wrapper">
+                <input type="checkbox" id="heatpump" class="alab-contact__checkbox" onchange="window.ALAB_CONTACT_APP.calculateConsumption()">
+                <span class="alab-contact__checkbox-label">Wärmepumpe</span>
+              </label>
+              <label class="alab-contact__checkbox-wrapper">
+                <input type="checkbox" id="ecar" class="alab-contact__checkbox" onchange="window.ALAB_CONTACT_APP.calculateConsumption()">
+                <span class="alab-contact__checkbox-label">E-Auto</span>
+              </label>
+            </div>
+
+            <button class="alab-contact__submit" onclick="window.ALAB_CONTACT_APP.goToStep(4)">Weiter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="step4" class="alab-contact__step">
+      <div class="alab-contact__form-section alab-contact__form-section--full">
+        <div class="alab-contact__step-header">
+          <button class="alab-contact__back-btn" onclick="window.ALAB_CONTACT_APP.goToStep(3)" aria-label="Zurück">
+            <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          </button>
+          <div class="alab-contact__step-nav">
+            <span class="alab-contact__step-nav-item alab-contact__step-nav-item--done">Dachfläche</span>
+            <span class="alab-contact__step-nav-separator">→</span>
+            <span class="alab-contact__step-nav-item alab-contact__step-nav-item--done">Stromverbrauch</span>
+            <span class="alab-contact__step-nav-separator">→</span>
+            <span class="alab-contact__step-nav-item alab-contact__step-nav-item--active">Anfrage</span>
+          </div>
+        </div>
+
+        <div class="alab-contact__success-banner">
+          <h2>Ihr Dach hat Solarpotenzial!</h2>
+          <p>Kostenlose und unverbindliche Beratung zu Ihrer PV-Anlage</p>
+        </div>
+
+        <form id="contactForm" class="alab-contact__form" novalidate>
+          <input type="hidden" id="latitude" name="latitude">
+          <input type="hidden" id="longitude" name="longitude">
+          <input type="hidden" id="formatted_address" name="formatted_address">
+          <input type="hidden" id="postal_code" name="postal_code">
+          <input type="hidden" id="locality" name="locality">
+          <input type="hidden" id="route" name="route">
+          <input type="hidden" id="street_number" name="street_number">
+          <input type="hidden" id="country" name="country">
+
+          <div class="alab-contact__form-row">
+            <div class="alab-contact__form-group">
+              <label for="firstName" class="alab-contact__label">
+                <span class="alab-contact__label-text">Vorname</span><span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
+              </label>
+              <input type="text" id="firstName" name="firstName" class="alab-contact__input" required aria-required="true" aria-describedby="firstName-error" minlength="2" maxlength="50">
+              <div id="firstName-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
+            </div>
+
+            <div class="alab-contact__form-group">
+              <label for="lastName" class="alab-contact__label">
+                <span class="alab-contact__label-text">Nachname</span><span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
+              </label>
+              <input type="text" id="lastName" name="lastName" class="alab-contact__input" required aria-required="true" aria-describedby="lastName-error" minlength="2" maxlength="50">
+              <div id="lastName-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div class="alab-contact__form-row">
+            <div class="alab-contact__form-group">
+              <label for="email" class="alab-contact__label">
+                <span class="alab-contact__label-text">E-Mail-Adresse</span><span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
+              </label>
+              <input type="email" id="email" name="email" class="alab-contact__input" required aria-required="true" aria-describedby="email-error" maxlength="100">
+              <div id="email-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
+            </div>
+
+            <div class="alab-contact__form-group">
+              <label for="phone" class="alab-contact__label">
+                <span class="alab-contact__label-text">Telefonnummer</span><span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
+              </label>
+              <input type="tel" id="phone" name="phone" class="alab-contact__input" required aria-required="true" aria-describedby="phone-error" pattern="^[\\d\\s\\+\\-\\(\\)\\/]+$" maxlength="20">
+              <div id="phone-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div class="alab-contact__form-group">
+            <label for="message" class="alab-contact__label"><span class="alab-contact__label-text">Ihre Nachricht (optional)</span></label>
+            <textarea id="message" name="message" class="alab-contact__textarea" rows="4" aria-describedby="message-hint" maxlength="1000"></textarea>
+            <div id="message-hint" class="alab-contact__hint">Teilen Sie uns Ihre Wünsche und Fragen mit</div>
+          </div>
+
+          <div class="alab-contact__form-group">
+            <div class="alab-contact__checkbox-wrapper">
+              <input type="checkbox" id="privacy" name="privacy" class="alab-contact__checkbox" required aria-required="true" aria-describedby="privacy-error">
+              <label for="privacy" class="alab-contact__checkbox-label">
+                Ich habe die <a href="#" class="alab-contact__link" target="_blank" rel="noopener">Datenschutzerklärung</a> zur Kenntnis genommen und stimme der Verarbeitung meiner Daten zu.
+                <span class="alab-contact__required" aria-label="Pflichtfeld">*</span>
+              </label>
+            </div>
+            <div id="privacy-error" class="alab-contact__error" role="alert" aria-live="polite"></div>
+          </div>
+
+          <button type="submit" class="alab-contact__submit" aria-label="Kontaktformular absenden">Kostenlose Beratung anfordern</button>
+        </form>
+      </div>
+    </div>
+
+    
+    <div id="successMessage" class="alab-contact__step">
+      <div class="alab-contact__success" role="status" aria-live="polite">
+        <svg class="alab-contact__success-icon" viewBox="0 0 24 24" width="64" height="64" aria-hidden="true">
+          <path fill="#4CAF50" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+        <h2 class="alab-contact__success-title">Vielen Dank für Ihre Anfrage!</h2>
+        <p class="alab-contact__success-text">Wir melden uns innerhalb von 24 Stunden.</p>
+        <a href="/" class="alab-contact__submit">Zur Startseite</a>
+      </div>
+    </div>
+
   </div>
 
-  <div class="hero-illustration">
-    <img src="https://static.wixstatic.com/media/cac2b9_846531d74dee4b3882cf7b969503a1df~mv2.png" alt="Solar Haus Illustration">
+  
+<script defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places,drawing,geometry&callback=initGoogleMaps"></script>
+</section>
+<section class="pv-process" id="pv-process" aria-label="Ihr Weg zur PV-Anlage">
+  <div class="pv-process__header">
+    <span class="pv-process__badge">SO EINFACH GEHT'S</span>
+    <h2 class="pv-process__title">Der Auftrag ist erteilt – und was jetzt?</h2>
+    <p class="pv-process__subtitle">In <strong>3 klaren Schritten</strong> zur maßgeschneiderten Anlage.</p>
+  </div>
+
+  <div class="pv-process__timeline">
+    
+    <article class="pv-process__step pv-process__step--left" id="pv-process-step1">
+      <div class="pv-process__grid">
+        <div class="pv-process__image">
+          <img src="/assets/img/04-nach-auftrag/planungsbüro.avif"
+               alt="Auftragsabwicklung PV" width="450" height="300" loading="eager">
+        </div>
+        <div class="pv-process__line"><div class="pv-process__number">1</div></div>
+        <div class="pv-process__info">
+          <h3 class="pv-process__h3">Auftrag & Abwicklung</h3>
+          <p class="pv-process__text">
+            Nach Ihrer Auftragserteilung kümmern wir uns um alles Weitere. Ein fester Projektleiter wird Ihr persönlicher Ansprechpartner, koordiniert alle Termine und erledigt sämtliche Formalitäten mit Netzbetreibern und Behörden.
+          </p>
+
+          <div class="pv-process__features">
+            <div class="pv-feature">
+              <span class="pv-feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 640 512"><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48c-79.5 0-144 64.5-144 144v32c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-32c0-79.5-64.5-144-144-144H178.3zm388.4-10.4c-14.1-13.3-31.5-23.4-50.5-29.4C560.1 262.8 592 226 592 184c0-61.9-50.1-112-112-112s-112 50.1-112 112c0 42 31.9 78.8 76.2 102.2c-19 6-36.4 16.1-50.5 29.4C341.3 352.9 320 388.9 320 428v32c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-32c0-39.1-21.3-75.1-54.3-94.4z"/></svg>
+              </span>
+              <div>
+                <strong>Persönlicher Projektleiter</strong>
+                <p>Ein fester Ansprechpartner, der Ihr Projekt von Anfang bis Ende betreut.</p>
+              </div>
+            </div>
+
+            <div class="pv-feature">
+              <span class="pv-feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 512 512"><path d="M336 352c-8.1 0-16.3-3.1-22.6-9.4L224 253.3l-89.4 89.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L168.7 224 79.4 134.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L224 178.7l89.4-89.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L280.7 224l89.4 89.4c12.5 12.5 12.5 32.8 0 45.3c-6.4 6.3-14.5 9.4-22.7 9.4zm160-32c0 88.4-71.6 160-160 160S176 408.4 176 320s71.6-160 160-160s160 71.6 160 160z"/></svg>
+              </span>
+              <div>
+                <strong>Erledigung der Bürokratie</strong>
+                <p>Wir übernehmen die Anmeldung beim Netzbetreiber und alle nötigen Genehmigungen.</p>
+              </div>
+            </div>
+
+            <div class="pv-feature">
+              <span class="pv-feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 640 512"><path d="M480 48c0-26.5-21.5-48-48-48H336c-26.5 0-48 21.5-48 48v96h96c26.5 0 48-21.5 48-48V48zM160 48c0-26.5-21.5-48-48-48H16C-8.5 0 0 21.5 0 48v48c0 26.5 21.5 48 48 48h96V48zM592 192H544c-26.5 0-48 21.5-48 48v224c0 26.5 21.5 48 48 48h48c26.5 0 48-21.5 48-48V240c0-26.5-21.5-48-48-48zM416 192H224V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V240c0-26.5-21.5-48-48-48H96c-26.5 0-48 21.5-48 48v224c0 26.5 21.5 48 48 48h48c26.5 0 48-21.5 48-48V192zm128 0V48c0-26.5-21.5-48-48-48H288c-26.5 0-48 21.5-48 48v144h128c26.5 0 48-21.5 48-48V48c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v416c0 26.5-21.5 48-48 48H432c-26.5 0-48-21.5-48-48V240c0-26.5 21.5-48 48-48h96c26.5 0 48-21.5 48-48V192z"/></svg>
+              </span>
+              <div>
+                <strong>Termin- & Materialkoordination</strong>
+                <p>Pünktliche Lieferung und reibungslose Koordination aller Gewerke.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    
+    <article class="pv-process__step pv-process__step--right" id="pv-process-step2">
+      <div class="pv-process__grid">
+        <div class="pv-process__info">
+          <h3 class="pv-process__h3">Installation</h3>
+          <p class="pv-process__text">
+            Unsere zertifizierten Montageteams installieren Ihre Photovoltaikanlage fachgerecht, sicher und sauber. Nach der Montage nehmen wir die Anlage in Betrieb und geben Ihnen eine verständliche Einweisung in alle Funktionen und die Monitoring-App.
+          </p>
+
+          <div class="pv-process__features">
+            <div class="pv-feature">
+              <span class="pv-feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 512 512"><path d="M192 0c-41.8 0-77.4 26.7-90.5 64H64C28.7 64 0 92.7 0 128v320c0 35.3 28.7 64 64 64h384c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64h-37.5C429.4 26.7 393.8 0 352 0H192zm0 64h160c13 0 24.4 8.5 28.2 21.3C376 100.7 365 112 352 112H192c-13 0-24.4-8.5-28.2-21.3C168 83.3 179 72 192 64zm160 96c-53 0-96 43-96 96s43 96 96 96s96-43 96-96s-43-96-96-96z"/></svg>
+              </span>
+              <div>
+                <strong>Zertifizierte Fachkräfte</strong>
+                <p>Unsere Montageteams sind bestens geschult und arbeiten nach höchsten Standards.</p>
+              </div>
+            </div>
+
+            <div class="pv-feature">
+              <span class="pv-feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 384 512"><path d="M288 0H160c-17.7 0-32 14.3-32 32v160h-96c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32h96v160c0 17.7 14.3 32 32 32h128c17.7 0 32-14.3 32-32V320h96c17.7 0 32-14.3 32-32v-64c0-17.7-14.3-32-32-32h-96V32c0-17.7-14.3-32-32-32z"/></svg>
+              </span>
+              <div>
+                <strong>Sichere Elektroinstallation</strong>
+                <p>Die gesamte DC- und AC-Installation wird von erfahrenen Elektrikern durchgeführt.</p>
+              </div>
+            </div>
+
+            <div class="pv-feature">
+              <span class="pv-feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 384 512"><path d="M16 64C16 28.7 44.7 0 80 0H304c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H80c-35.3 0-64-28.7-64-64V64zM144 448c0 8.8 7.2 16 16 16h64c8.8 0 16-7.2 16-16s-7.2-16-16-16H160c-8.8 0-16 7.2-16 16zM304 64H80V384H304V64z"/></svg>
+              </span>
+              <div>
+                <strong>Persönliche Einweisung</strong>
+                <p>Wir erklären Ihnen verständlich die Funktion Ihrer neuen Anlage und der Monitoring-App.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pv-process__line"><div class="pv-process__number">2</div></div>
+
+        <div class="pv-process__image">
+          <img src="/assets/img/04-nach-auftrag/anlage1_P.avif"
+               alt="Installation PV" width="450" height="300" loading="lazy">
+        </div>
+      </div>
+    </article>
+
+    
+    <article class="pv-process__step pv-process__step--left" id="pv-process-step3">
+      <div class="pv-process__grid">
+        <div class="pv-process__image">
+          <img src="/assets/img/04-nach-auftrag/anlage6_M.jpg"
+               alt="Service & Betrieb PV" width="450" height="300" loading="lazy">
+        </div>
+
+        <div class="pv-process__line"><div class="pv-process__number">3</div></div>
+
+        <div class="pv-process__info">
+          <h3 class="pv-process__h3">Service & Betrieb</h3>
+          <p class="pv-process__text">
+            Im Betrieb liefern wir echten O&M-Mehrwert: proaktive Überwachung (Alarme, spezifischer Ertrag, PR), jährliche Sicht- und elektrische Prüfung, Reaktionszeit &lt;48 h bei Störungen sowie vollständige Garantie-/Versicherungsabwicklung. Auf Wunsch erweitern wir Ihre Anlage um Speicher, Wallbox und intelligentes Lastmanagement.
+          </p>
+
+          <div class="pv-process__features">
+            <div class="pv-feature">
+              <span class="pv-feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 384 512"><path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/></svg>
+              </span>
+              <div>
+                <strong>Anlagendokumentation</strong>
+                <p>Sie erhalten alle wichtigen Unterlagen und Garantiezertifikate ordentlich aufbereitet.</p>
+              </div>
+            </div>
+
+            <div class="pv-feature">
+              <span class="pv-feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 512 512"><path d="M480 0C506.5 0 512 25.5 512 52v408c0 26.5-5.5 52-32 52c-26.5 0-32-25.5-32-52v-8.2C405 487.6 361.3 512 312 512c-79.5 0-144-64.5-144-144s64.5-144 144-144c49.3 0 93 24.4 120.2 60.2V52c0-26.5 5.5-52 32-52s32 25.5 32 52v408c0 13.3-2.5 26.1-7 38.1C497.3 490 504.7 478 512 460V52zM0 52C0 25.5 5.5 0 32 0S64 25.5 64 52v408c0 26.5-5.5 52-32 52S0 486.5 0 460V52zm200 316c0 61.9-50.1 112-112 112S-16 430-16 368s50.1-112 112-112s112 50.1 112 112z"/></svg>
+              </span>
+              <div>
+                <strong>Langfristiger Support</strong>
+                <p>Auch nach der Installation sind wir bei allen Fragen Ihr zuverlässiger Ansprechpartner.</p>
+              </div>
+            </div>
+
+            <div class="pv-feature">
+              <span class="pv-feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 512 512"><path d="M32 32c19.9 0 32 12.1 32 32V400c0 19.9-12.1 32-32 32s-32-12.1-32-32V64C0 44.1 12.1 32 32 32zM160 224c19.9 0 32 12.1 32 32v144c0 19.9-12.1 32-32 32s-32-12.1-32-32V256c0-19.9 12.1-32 32-32zM288 160c19.9 0 32 12.1 32 32v208c0 19.9-12.1 32-32 32s-32-12.1-32-32V192c0-19.9 12.1-32 32-32zM416 96c19.9 0 32 12.1 32 32v272c0 19.9-12.1 32-32 32s-32-12.1-32-32V128c0-19.9 12.1-32 32-32z"/></svg>
+              </span>
+              <div>
+                <strong>Wartung & Monitoring</strong>
+                <p>Wir überwachen auf Wunsch Ihre Anlage und bieten professionelle Wartungspakete an.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
   </div>
 </section>
 
-<!-- Platzhalter-Sektionen (vorerst so belassen) -->
-<section id="foerder-check" style="height:500px;background:#f4f4f4;padding:50px;display:flex;align-items:center;justify-content:center;">
-  <h2 style="text-align:center;font-family:-apple-system,sans-serif;">Hier könnte Ihr Förder-Check-Rechner platziert werden.</h2>
-</section>
-<section id="calculator" style="height:500px;background:#fff;padding:50px;display:flex;align-items:center;justify-content:center;">
-  <h2 style="text-align:center;font-family:-apple-system,sans-serif;">Hier könnte der Solarplanrechner platziert werden.</h2>
-</section>
 
 
-  <script src="/pv-zuhause/_sections/01-hero/hero.js" defer></script>
+
+
+  <!-- seiten-spezifische JS -->
+  <script src="/pv-zuhause/_sections/01-hero/hero.js" defer></script><script src="/pv-zuhause/_sections/03-planer/section.js" defer></script><script src="/pv-zuhause/_sections/05-kontakt/kontaktfl.js" defer></script><script src="/pv-zuhause/_sections/06-referenzen/referenzgalerie.js" defer></script>
 </body>
 </html>
