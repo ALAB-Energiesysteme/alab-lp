@@ -814,3 +814,118 @@ html { scroll-behavior: smooth; }
 
 /* Höhe deines fixen Headers als Abstand – bei dir meist ~80–100px */
 #alab-planer { scroll-margin-top: 92px; }
+/* Platz links im Input vergrößern, damit der Placeholder nicht unterm Icon liegt */
+.alab-contact__input--with-icon {
+  padding-left: 56px;  /* vorher 46px */
+}
+
+/* Mobile Kompaktierung */
+@media (max-width: 767px) {
+  /* kompaktere Abstände/Typo */
+  .alab-contact__container { padding: 24px 16px; }
+  .alab-contact__title { font-size: 1.6rem; margin-bottom: 6px; }
+  .alab-contact__subtitle { font-size: 0.95rem; }
+
+  .alab-contact__step-header {
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+  }
+
+  /* Map/Sidebar kompakter + niedrigere Karte */
+  .alab-contact__map-content { gap: 16px; }
+  .alab-contact__map-large { height: 320px; }
+  .alab-contact__map-sidebar { padding: 14px; }
+
+  .alab-contact__instruction { padding: 10px; margin-bottom: 12px; }
+  .alab-contact__roof-size { font-size: 2rem; }
+
+  /* Consumption-Step schlanker */
+  .alab-contact__consumption-content { gap: 20px; }
+  .alab-contact__consumption-box { padding: 22px; }
+  .alab-contact__consumption-box h2 { font-size: 2.25rem; }
+
+  /* Form kompakter */
+  .alab-contact__form-row { gap: 12px; }
+  .alab-contact__form-group { margin-bottom: 14px; }
+  .alab-contact__submit { padding: 12px 24px; font-size: 1rem; }
+
+  /* Success kompakter */
+  .alab-contact__success { padding: 36px 20px; }
+  .alab-contact__success-banner { padding: 24px; }
+}
+
+/* ==== Mobile Optimierung 03-Planer (kompakt + Reihenfolge) ==== */
+
+/* Tablet + Mobile schlanker */
+@media (max-width: 1023px) {
+  .alab-contact__container { padding: 24px 16px; }
+  .alab-contact__step--active { grid-template-columns: 1fr; gap: 24px; }
+
+  /* Sidebar/Sticky auflösen und kompakter */
+  .alab-contact__map-sidebar,
+  .alab-contact__consumption-display { position: static; top: auto; }
+  .alab-contact__map-sidebar { padding: 16px; }
+}
+
+/* Mobile: Überschrift + Untertext ÜBER dem Bild + kompakter */
+@media (max-width: 767px) {
+  /* Reihenfolge korrigieren: erst Text/Form, dann Bild */
+  .alab-contact__form-section { order: 1; }
+  .alab-contact__image-section { order: 2; margin-top: 8px; }
+
+  /* Typografie kompakter */
+  .alab-contact__title { font-size: 1.6rem; line-height: 1.25; margin-bottom: 6px; }
+  .alab-contact__subtitle { font-size: 0.98rem; line-height: 1.45; margin: 0 0 10px; }
+
+  /* Abstände reduzieren */
+  .alab-contact__header { margin-bottom: 16px; }
+  .alab-contact__address-group { margin-bottom: 16px; }
+  .alab-contact__form-group { margin-bottom: 14px; }
+  .alab-contact__form-row { gap: 12px; margin-bottom: 0; grid-template-columns: 1fr; }
+
+  /* Inputs kompakter */
+  .alab-contact__input { padding: 12px 14px; font-size: 0.98rem; }
+  .alab-contact__input--with-icon { padding-left: 42px; }
+  .alab-contact__input-icon { left: 12px; width: 18px; height: 18px; }
+  .alab-contact__textarea { min-height: 90px; }
+
+  /* Buttons */
+  .alab-contact__submit { padding: 12px 16px; font-size: 1rem; }
+
+  /* Bild */
+  .alab-contact__hero-image { border-radius: 10px; box-shadow: none; }
+
+  /* Step-Header/Navigation schlanker */
+  .alab-contact__step-header { gap: 12px; margin-bottom: 14px; padding-bottom: 10px; }
+  .alab-contact__back-btn { padding: 8px; }
+  .alab-contact__step-nav-item { font-size: 0.82rem; }
+
+  /* Map & Consumption kompakter */
+  .alab-contact__map-large { height: 320px; }
+  .alab-contact__map-content { gap: 16px; }
+  .alab-contact__map-title { font-size: 1.25rem; margin-bottom: 6px; }
+  .alab-contact__map-description { font-size: 0.95rem; margin-bottom: 10px; }
+
+  .alab-contact__consumption-content { grid-template-columns: 1fr; gap: 16px; }
+  .alab-contact__consumption-box { padding: 22px; }
+  .alab-contact__consumption-box h2 { font-size: 2.1rem; }
+}
+
+/* Sehr kleine Geräte (≤ 390px) nochmals enger */
+@media (max-width: 390px) {
+  .alab-contact__container { padding: 12px; }
+  .alab-contact__title { font-size: 1.45rem; }
+  .alab-contact__subtitle { font-size: 0.92rem; }
+  .alab-contact__input { font-size: 0.95rem; padding: 11px 12px; }
+  .alab-contact__map-large { height: 280px; }
+}
+/* Platz links genug für das Icon -> Placeholder nicht dahinter */
+.alab-contact__input--with-icon { padding-left: 56px; }
+
+/* Mobile Reihenfolge: 1 = Header/Form, 2 = Bild, 3 = (ausgelagerte) Adresse */
+@media (max-width: 767px) {
+  .alab-contact__form-section { order: 1; }
+  .alab-contact__image-section { order: 2; }
+  .alab-contact__address-group.is-detached { order: 3; margin-top: 10px; }
+}

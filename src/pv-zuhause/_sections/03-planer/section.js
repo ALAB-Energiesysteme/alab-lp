@@ -92,7 +92,53 @@ const MAKE_WEBHOOK_URL = 'https://hook.eu2.make.com/yloo9gmjoxtsua7r2g5z6af9lqs0
     if (!elements.form) return;
     setupEventListeners();
     setupFormValidation();
+    initMobileReflow(); 
   }
+function moveAddressUnderImage() {
+  const isMobile = window.matchMedia('(max-width: 767px)').matches;
+  const addr    = document.querySelector('.alab-contact__address-group');
+  const img     = document.querySelector('.alab-contact__image-section');
+  const header  = document.querySelector('.alab-contact__header');
+
+  if (!addr || !img || !header) return;
+
+  // einmalig Platzhalter merken, um später exakt zurückzusetzen
+  if (!addr._placeholder) {
+    addr._placeholder = document.createComment('addr-home');
+    addr.parentNode.insertBefore(addr._placeholder, addr.nextSibling);
+  }
+
+  if (isMobile) {
+    if (!addr.dataset.mobMoved) {
+      // direkt NACH dem Bild einfügen
+      img.insertAdjacentElement('afterend', addr);
+      addr.dataset.mobMoved = '1';
+      addr.classList.add('is-detached'); // <- für CSS-Reihenfolge
+    }
+  } else {
+    if (addr.dataset.mobMoved) {
+      // an ursprüngliche Stelle zurück
+      addr._placeholder.parentNode.insertBefore(addr, addr._placeholder);
+      addr.classList.remove('is-detached');
+      delete addr.dataset.mobMoved;
+    } else {
+      // sicherstellen: Adresse bleibt unter dem Header
+      header.insertAdjacentElement('afterend', addr);
+    }
+  }
+}
+
+
+// beim Start & bei Resize (mit leichtem Debounce)
+function initMobileReflow() {
+  moveAddressUnderImage();
+  let t;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(moveAddressUnderImage, 150);
+  });
+}
+
 
   function cacheElements() {
     elements.form = document.getElementById('contactForm');
