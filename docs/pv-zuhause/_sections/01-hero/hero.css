@@ -20,8 +20,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .hero-badge{display:inline-block;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);padding:8px 16px;border-radius:20px;font-size:13px;margin-bottom:20px;font-weight:500}
 .hero-title{font-size:clamp(2.5rem,5vw,4rem);font-weight:700;margin-bottom:20px;line-height:1.1;text-shadow:2px 2px 4px rgba(0,0,0,.3)}
 .hero-subtitle{font-size:clamp(1rem,2vw,1.25rem);font-weight:400;margin-bottom:40px;opacity:.95;line-height:1.5}
-.cta-button{display:inline-block;background:linear-gradient(135deg,#4CAF50 0%,#45a049 100%);color:#fff;padding:16px 40px;border-radius:30px;text-decoration:none;font-size:16px;font-weight:600;transition:.3s;box-shadow:0 4px 20px rgba(76,175,80,.3);position:relative;overflow:hidden}
-.cta-button:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(76,175,80,.4)}
+.cta-button{display:inline-block;background:linear-gradient(135deg,#d4af37 0%,#b68f2e 100%);color:#111;padding:16px 40px;border-radius:30px;text-decoration:none;font-size:16px;font-weight:600;transition:.3s;box-shadow:0 4px 20px rgba(212, 175, 55, 0.4);position:relative;overflow:hidden}
+.cta-button:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(212, 175, 55, 0.6)}
 .cta-button::after{content:'→';margin-left:8px;transition:transform .3s}
 .cta-button:hover::after{transform:translateX(4px)}
 
