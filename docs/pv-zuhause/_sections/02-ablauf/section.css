@@ -1,9 +1,16 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+/* --- WICHTIG: Importiere Montserrat sicherheitshalber hier nochmal --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 /* --- Basis-Styling --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background:#fff; color:#1a1a1a; overflow-x:hidden; }
+
+body { 
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important; 
+  background:#fff; 
+  color:#1a1a1a; 
+  overflow-x:hidden; 
+}
+
 .timeline-section .container { max-width:1200px; margin:0 auto; padding:60px 20px; }
 
 /* Header */
@@ -27,12 +34,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helv
 }
 
 .timeline-step { 
-  position:relative; /* WICHTIG für ::after */
+  position:relative; 
   background:#fff; 
-  border: 1px solid #f0f0f0; /* Subtilerer Rand statt Farbverlauf */
-  border-radius:16px; /* Weichere Ecken */
+  border: 1px solid #f0f0f0; 
+  border-radius:16px; 
   padding:25px; 
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.04), 0 2px 5px rgba(0, 0, 0, 0.02); /* Subtilerer, moderner Schatten */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.04), 0 2px 5px rgba(0, 0, 0, 0.02); 
   z-index:10; 
   transition:transform .3s ease, box-shadow .3s ease; 
 }
@@ -45,67 +52,67 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helv
 .step-5 { 
   grid-column:3/4; 
   grid-row:3/4; 
-  /* Hervorhebung für den letzten Schritt */
-  border: 2px solid transparent; /* Platzhalter für border-image */
+  border: 2px solid transparent; 
   border-image: linear-gradient(135deg,#E5C44D,#F3D663) 1;
   box-shadow: 0 8px 25px rgba(230, 194, 60, 0.2), 0 4px 10px rgba(230, 194, 60, 0.1);
-  transform: scale(1.02); /* Leicht vergrößern */
+  transform: scale(1.02); 
 }
 
-/* Spezifischer Hover-Effekt für den hervorgehobenen Schritt */
 .step-5:hover {
-  transform: scale(1.02) translateY(-5px); /* Behält Skalierung bei und fügt Hover hinzu */
+  transform: scale(1.02) translateY(-5px); 
   box-shadow: 0 10px 30px rgba(230, 194, 60, 0.3), 0 5px 15px rgba(230, 194, 60, 0.2);
 }
 
 .step-icon { 
-  width:56px; height:56px; /* Etwas kleiner */
+  width:56px; height:56px; 
   background:linear-gradient(135deg,#E5C44D 0%, #F3D663 100%); 
-  border-radius:50%; /* Rund statt eckig */
+  border-radius:50%; 
   display:flex; align-items:center; justify-content:center; 
-  margin-bottom:20px; /* Mehr Abstand nach unten */
+  margin-bottom:20px; 
   font-size:1.4rem; color:#fff; font-weight:600; 
-  box-shadow: 0 4px 12px rgba(230, 194, 60, 0.3); /* Passender Schatten */
+  box-shadow: 0 4px 12px rgba(230, 194, 60, 0.3); 
 }
 .step-number { font-size:.8rem; color:#E5C44D; margin-bottom:4px; font-weight:600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* --- HIER WURDE ES ERZWINGEN --- */
 .step-title { 
-  font-family: 'Patrick Hand', cursive; /* Handgeschriebener Stil */
-  font-size:1.6rem; /* Angepasste Größe für Lesbarkeit */
-  font-weight:600; 
+  font-family: 'Montserrat', sans-serif !important; /* !important erzwingt die Änderung */
+  font-size:1.25rem; 
+  font-weight:700; 
   margin-bottom:12px; 
-  color:#222; 
+  color:#1a1a1a; 
+  letter-spacing: -0.02em; 
 }
 .step-description { 
-  font-family: 'Patrick Hand', cursive; /* Handgeschriebener Stil */
-  font-size:1.1rem; /* Angepasste Größe für Lesbarkeit */
+  font-family: 'Montserrat', sans-serif !important; /* !important erzwingt die Änderung */
+  font-size:0.95rem; 
   line-height:1.6; 
   color:#555; 
+  font-weight: 400;
 }
 
 /* --- CSS PFEILE --- */
-        
-/* Basis für alle Pfeile */
 .timeline-step::after{
   content:"";
   position:absolute;
   z-index:-1;
   background-repeat:no-repeat;
-  background-size: contain;   /* erhält Proportionen */
+  background-size: contain;   
   background-position: center;
   pointer-events:none;
 }
 
-/* 1 → 2 */
+/* 1 -> 2 */
 .step-1::after{
   background-image:url("/assets/img/02-ablauf/pfeil1_LP.svg");
-  width:210px;                /* nur eine Dimension */
-  aspect-ratio: 2 / 5;        /* Verhältnis fixen */
+  width:210px;               
+  aspect-ratio: 2 / 5;        
   top:-90%;
   left:90%;
   transform: translate(100px,10%) rotate(180deg);
 }
 
-/* 2 → 3 */
+/* 2 -> 3 */
 .step-2::after{
   background-image:url("/assets/img/02-ablauf/pfeil3_LP.svg");
   width:200px;
@@ -115,18 +122,18 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helv
   transform: translateY(-20px) rotate(-45deg);
 }
 
-/* 3 → 4 */
+/* 3 -> 4 */
 .step-3::after{
   background-image:url("/assets/img/02-ablauf/pfeil2_LP.svg");
   width:180px;
   aspect-ratio: 9 / 10;
-  top:100%;                   /* <- Einheit gefehlt */
+  top:100%;                  
   left:10%;
   transform: translate(-10px,-50%) rotate(135deg);
   transform-origin: top left;
 }
 
-/* 4 → 5 */
+/* 4 -> 5 */
 .step-4::after{
   background-image:url("/assets/img/02-ablauf/pfeil4_LP.svg");
   width:520px;
@@ -139,132 +146,57 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helv
 
 /* ===== Section 2 – Responsive Overrides ===== */
 
-/* Tablet & kleinere Laptops (<=1200px) */
 @media (max-width: 1200px){
   .timeline-section .header-section{ margin-bottom:40px; padding:28px 16px; }
   .timeline-section .header-section h1{ font-size:clamp(1.6rem,2.2vw,2.2rem); }
   .timeline-section .header-text{ font-size:1rem; }
-
   .timeline-section .container{ padding:48px 16px; }
-
-  /* 3 Spalten -> 2 Spalten */
-  .timeline-grid{
-    max-width:100%;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
-  /* Neu-Positionierung ohne HTML-Änderung */
+  .timeline-grid{ max-width:100%; grid-template-columns: 1fr 1fr; gap: 20px; }
   .step-1{ grid-column:1; grid-row:1; }
   .step-2{ grid-column:2; grid-row:1; }
-  .step-3{ grid-column:1 / -1; grid-row:2; } /* mittig, volle Breite */
+  .step-3{ grid-column:1 / -1; grid-row:2; } 
   .step-4{ grid-column:1; grid-row:3; }
   .step-5{ grid-column:2; grid-row:3; }
-
-  /* Lange SVG-Pfeile auf kleineren Screens ausblenden, damit nichts übersteht */
   .timeline-step::after{ display:none; }
 }
 
-/* Phones & kleine Tablets (<=768px) */
 @media (max-width: 768px){
   .timeline-section{ padding:20px 0; }
-
-  /* 1 Spalte Stack */
-  .timeline-grid{
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .step-1, .step-2, .step-3, .step-4, .step-5{
-    grid-column:1; grid-row:auto;
-  }
-
-  /* Karten kompakter */
+  .timeline-grid{ grid-template-columns: 1fr; gap: 16px; }
+  .step-1, .step-2, .step-3, .step-4, .step-5{ grid-column:1; grid-row:auto; }
   .timeline-step{ padding:18px; border-radius:14px; }
   .step-icon{ width:48px; height:48px; font-size:1.2rem; margin-bottom:12px; }
-  .step-title{ font-size:1.35rem; }
-  .step-description{ font-size:1rem; }
-
-  /* Keine Hover-Jumps auf Touch */
+  .step-title{ font-size:1.15rem; } 
+  .step-description{ font-size:0.9rem; } 
   .timeline-step:hover{ transform:none; box-shadow: 0 6px 15px rgba(0,0,0,.06); }
 }
 
-/* Sehr kleine Geräte (<=380px) */
 @media (max-width: 380px){
   .timeline-step{ padding:16px; }
-  .step-title{ font-size:1.2rem; }
-  .step-description{ font-size:.95rem; }
+  .step-title{ font-size:1.1rem; }
+  .step-description{ font-size:.85rem; }
 }
-
-
 
 /* ===== Mobile: kompakt für die 5-Schritte-Karten ===== */
 @media (max-width: 480px) {
-
-  /* Außenabstände enger */
   .container { padding-left: 14px; padding-right: 14px; }
   .header-section { margin-bottom: 20px; padding: 16px 14px; }
   .header-section h1 { font-size: 1.15rem; }
   .header-text { font-size: .92rem; line-height: 1.45; }
-
   .timeline-section { padding: 0; overflow-x: hidden; }
   .timeline-grid { gap: 10px; }
-
-  /* Karte kompakt + in 2 Spalten: Badge links, Text rechts */
-  .timeline-step {
-    padding: 12px 12px;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,.06);
-    display: grid;
-    grid-template-columns: 40px 1fr;
-    column-gap: 12px;
-    row-gap: 6px;
-  }
-
-  /* Nummer-Badge kleiner, ohne großen Schatten */
-  .step-icon {
-    width: 36px; height: 36px;
-    margin: 0;               /* kein vertikaler Abstand oben */
-    box-shadow: 0 2px 6px rgba(230,194,60,.25);
-    grid-row: 1 / span 2;    /* Badge über Titel + Teaser */
-    align-self: start;
-  }
-
-
-
-  .step-title {
-    font-size: 1.05rem;
-    margin: 0;               /* direkt neben dem Badge */
-    line-height: 1.25;
-  }
-
-  .step-description {
-    grid-column: 1 / -1;     /* volle Breite unter dem Titel */
-    font-size: .95rem;
-    line-height: 1.45;
-    margin-top: 2px;
-  }
-
-  /* Pfeil-Dekos aus, damit nix übersteht */
+  .timeline-step { padding: 12px 12px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,.06); display: grid; grid-template-columns: 40px 1fr; column-gap: 12px; row-gap: 6px; }
+  .step-icon { width: 36px; height: 36px; margin: 0; box-shadow: 0 2px 6px rgba(230,194,60,.25); grid-row: 1 / span 2; align-self: start; }
+  .step-title { font-size: 1rem; margin: 0; line-height: 1.25; }
+  .step-description { grid-column: 1 / -1; font-size: .9rem; line-height: 1.45; margin-top: 2px; }
   .timeline-step::after { display: none !important; }
-
-  /* Letzte Karte nicht extra vergrößern auf Mobile */
-  .step-5 {
-    border-image: none;
-    border: 1px solid #eee;
-    transform: none;
-    box-shadow: 0 3px 10px rgba(230,194,60,.12);
-  }
-
-  /* Sicherheitsnetz gegen horizontales Scrollen */
+  .step-5 { border-image: none; border: 1px solid #eee; transform: none; box-shadow: 0 3px 10px rgba(230,194,60,.12); }
   body, .timeline-section, .timeline-grid, .timeline-step { max-width: 100%; }
 }
 
-/* Ultra-kompakt für sehr kleine Geräte (≤360px) */
 @media (max-width: 360px) {
-  .step-title { font-size: 1rem; }
-  .step-description { font-size: .92rem; }
+  .step-title { font-size: 0.95rem; }
+  .step-description { font-size: .85rem; }
   .step-icon { width: 32px; height: 32px; }
   .timeline-step { padding: 10px; column-gap: 10px; }
 }
-
-
