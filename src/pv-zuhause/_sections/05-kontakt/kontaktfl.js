@@ -26,7 +26,7 @@
   };
 
   const steps = [
-    { key:'haustyp', title:'In welchem Haustyp wohnen Sie?', progress:10, cols:3,
+    { key:'haustyp', title:'In welchem Haustyp wohnen Sie?', progress:0, cols:3,
       options:[
         {text:'Reihenhaus',icon:icons.reihenhaus},{text:'Doppelhaushälfte',icon:icons.doppelhaus},
         {text:'Einfamilienhaus',icon:icons.einfamilienhaus},{text:'Gewerbe',icon:icons.gewerbe},
@@ -153,8 +153,16 @@
             <div class="alab-kf__error" id="err-mail"></div>
           </div>
           <div class="alab-kf__field">
-            <label class="alab-kf__label" for="kf-phone">Telefon (optional)</label>
-            <input class="alab-kf__input" id="kf-phone" name="phone" value="${data.phone||''}">
+            <label class="alab-kf__label" for="kf-phone">Telefon</label>
+<input class="alab-kf__input"
+       id="kf-phone"
+       name="phone"
+       required
+       inputmode="tel"
+       autocomplete="tel"
+       pattern="^[0-9+()\\s-]{6,}$"
+       value="${data.phone||''}">
+<div class="alab-kf__error" id="err-phone"></div>
           </div>
         </div>
 
@@ -187,6 +195,7 @@ function validate({show=false} = {}){
     ['kf-street','err-street','Bitte Straße eingeben.', v=>v.trim().length>1],
     ['kf-no','err-no','Bitte Hausnummer eingeben.', v=>v.trim().length>=1],
     ['kf-plz','err-plz','Bitte gültige PLZ angeben (5 Ziffern).', v=>/^\d{5}$/.test(v)],
+    ['kf-phone','err-phone','Bitte Telefonnummer angeben.', v=>v.trim().length>=1],
     ['kf-city','err-city','Bitte Ort eingeben.', v=>v.trim().length>1],
     ['kf-mail','err-mail','Bitte gültige E-Mail angeben.', v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)]
   ];
